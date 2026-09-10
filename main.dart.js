@@ -48934,12 +48934,11 @@ A.w6.prototype={
 a9(){var s=t.N,r=t.yi
 return new A.XL(A.r(s,t.y),A.r(s,r),A.r(s,r))}}
 A.XL.prototype={
-adY(a){var s="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1000"
-if(B.c.n(a,"\uc624\ud508\uc6cc\ud130")&&!B.c.n(a,"\uc5b4\ub4dc\ubc34\uc2a4\ub4dc"))return s
+adY(a){if(B.c.n(a,"\uc624\ud508\uc6cc\ud130")&&!B.c.n(a,"\uc5b4\ub4dc\ubc34\uc2a4\ub4dc"))return"https://drive.google.com/file/d/1KnVX396MXXPG-JrKQdpAFbOA9fp9ZHiM/view?usp=drive_link"
 else if(B.c.n(a,"\uc5b4\ub4dc\ubc34\uc2a4\ub4dc"))return u.k
 else if(B.c.n(a,"\ub808\uc2a4\ud050"))return u.F
 else if(B.c.n(a,"\ub9c8\uc2a4\ud130")||B.c.n(a,"\uac15\uc0ac"))return u.H
-return s},
+return"https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1000"},
 adI(a){var s="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1000"
 if(B.c.n(a,"\uc624\ud508\uc6cc\ud130")&&!B.c.n(a,"\uc5b4\ub4dc\ubc34\uc2a4\ub4dc"))return s
 else if(B.c.n(a,"\uc5b4\ub4dc\ubc34\uc2a4\ub4dc"))return u.F
