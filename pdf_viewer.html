@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>APDI PDF</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #0B1220; color: #e2e8f0; font-family: sans-serif; }
+    #bar {
+      display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+      background: #1E293B; border-bottom: 1px solid #334155;
+    }
+    button {
+      background: #00FFC2; color: #0F172A; border: 0; border-radius: 6px;
+      padding: 6px 10px; font-weight: 700; cursor: pointer;
+    }
+    button:disabled { opacity: .4; cursor: default; }
+    #canvasWrap { height: calc(100% - 46px); overflow: auto; text-align: center; }
+    canvas { display: block; margin: 0 auto; }
+    #status { font-size: 12px; color: #94a3b8; }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+  <div id="bar">
+    <button id="prev" type="button">이전</button>
+    <span id="status">불러오는 중…</span>
+    <button id="next" type="button">다음</button>
+  </div>
+  <div id="canvasWrap"><canvas id="pdfCanvas"></canvas></div>
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    const params = new URLSearchParams(location.search);
+    const file = params.get('file') || '';
+    const canvas = document.getElementById('pdfCanvas');
+    const status = document.getElementById('status');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    let pdf = null;
+    let pageNum = 1;
+
+    async function render() {
+      if (!pdf) return;
+      const page = await pdf.getPage(pageNum);
+      const wrap = document.getElementById('canvasWrap');
+      const scale = Math.max(0.8, (wrap.clientWidth - 16) / page.getViewport({ scale: 1 }).width);
+      const viewport = page.getViewport({ scale: scale });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
+      status.textContent = pageNum + ' / ' + pdf.numPages;
+      prev.disabled = pageNum <= 1;
+      next.disabled = pageNum >= pdf.numPages;
+    }
+
+    prev.onclick = () => { if (pageNum > 1) { pageNum--; render(); } };
+    next.onclick = () => { if (pdf && pageNum < pdf.numPages) { pageNum++; render(); } };
+    window.addEventListener('resize', () => render());
+
+    (async function () {
+      if (!file) { status.textContent = 'PDF 주소가 없습니다.'; return; }
+      try {
+        pdf = await pdfjsLib.getDocument({ url: file, withCredentials: false }).promise;
+        pageNum = 1;
+        await render();
+      } catch (e) {
+        status.textContent = 'PDF를 열 수 없습니다. CORS 또는 주소를 확인하세요.';
+      }
+    })();
+  </script>
+</body>
+</html>
