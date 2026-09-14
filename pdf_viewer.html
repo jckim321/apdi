@@ -8,10 +8,8 @@
     html, body {
       margin: 0; height: 100%; background: #0B1220; color: #e2e8f0;
       font-family: sans-serif; overflow: hidden;
-      touch-action: none;
-      overscroll-behavior: none;
-      overscroll-behavior-x: none;
     }
+    button, #bar, #chrome { touch-action: manipulation; }
     #chrome { display: none; padding: 10px 14px 8px; background: #0B132B; border-bottom: 1px solid #334155; }
     body.standalone #chrome { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
     #bookTitle { font-size: 15px; font-weight: 700; color: #fff; }
@@ -34,7 +32,6 @@
       overflow: hidden;
       position: relative;
       background: #0B1220;
-      touch-action: none;
       overscroll-behavior: none;
     }
     #pan {
@@ -237,7 +234,6 @@
     }
 
     pan.addEventListener('pointerdown', (e) => {
-      try { e.preventDefault(); } catch (_) {}
       pan.setPointerCapture(e.pointerId);
       pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       if (pointers.size === 2) {
@@ -249,11 +245,10 @@
         dragStart = { x: e.clientX, y: e.clientY, panX: panX, panY: panY, t: Date.now() };
         swiping = userScale <= 1.01;
       }
-    }, { passive: false });
+    });
 
     pan.addEventListener('pointermove', (e) => {
       if (!pointers.has(e.pointerId)) return;
-      try { e.preventDefault(); } catch (_) {}
       pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       if (pointers.size >= 2 && pinchStartDist > 0) {
         userScale = pinchStartScale * (pointerDistance() / pinchStartDist);
@@ -269,7 +264,7 @@
           applyTransform();
         }
       }
-    }, { passive: false });
+    }, { passive: true });
 
     function endPointer(e, cancelled) {
       const start = dragStart;
@@ -291,14 +286,6 @@
     pan.addEventListener('pointerup', (e) => endPointer(e, false));
     pan.addEventListener('pointercancel', (e) => endPointer(e, true));
     pan.addEventListener('lostpointercapture', (e) => { pointers.delete(e.pointerId); });
-
-    document.addEventListener('touchmove', (e) => {
-      if (e.touches.length >= 1) e.preventDefault();
-    }, { passive: false });
-    document.addEventListener('gesturestart', (e) => e.preventDefault());
-    window.addEventListener('wheel', (e) => {
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) e.preventDefault();
-    }, { passive: false });
 
     let resizeTimer = 0;
     window.addEventListener('resize', () => {
