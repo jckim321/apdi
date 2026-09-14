@@ -2,68 +2,288 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>APDI PDF</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>APDI 교재</title>
   <style>
-    html, body { margin: 0; height: 100%; background: #0B1220; color: #e2e8f0; font-family: sans-serif; }
+    html, body {
+      margin: 0; height: 100%; background: #0B1220; color: #e2e8f0;
+      font-family: sans-serif; overflow: hidden; touch-action: none;
+    }
+    #chrome { display: none; padding: 10px 14px 8px; background: #0B132B; border-bottom: 1px solid #334155; }
+    body.standalone #chrome { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    #bookTitle { font-size: 15px; font-weight: 700; color: #fff; }
+    #bookMeta { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+    #closeBtn { background: transparent; color: #94a3b8; padding: 4px 8px; }
     #bar {
       display: flex; align-items: center; gap: 8px; padding: 8px 10px;
-      background: #1E293B; border-bottom: 1px solid #334155;
+      background: #1E293B; border-bottom: 1px solid #334155; flex-shrink: 0;
     }
+    body.standalone #stage { height: calc(100% - 118px); }
     button {
       background: #00FFC2; color: #0F172A; border: 0; border-radius: 6px;
-      padding: 6px 10px; font-weight: 700; cursor: pointer;
+      padding: 6px 12px; font-weight: 700; cursor: pointer;
     }
     button:disabled { opacity: .4; cursor: default; }
-    #canvasWrap { height: calc(100% - 46px); overflow: auto; text-align: center; }
-    canvas { display: block; margin: 0 auto; }
-    #status { font-size: 12px; color: #94a3b8; }
+    #status { font-size: 12px; color: #94a3b8; flex: 1; text-align: center; }
+    #hint { font-size: 10px; color: #64748b; }
+    #stage {
+      height: calc(100% - 46px);
+      overflow: hidden;
+      position: relative;
+      background: #0B1220;
+    }
+    #pan {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: none;
+    }
+    #sheet {
+      transform-origin: center center;
+      will-change: transform;
+    }
+    canvas { display: block; box-shadow: 0 8px 24px rgba(0,0,0,.35); background: #fff; }
+    #hitLeft, #hitRight {
+      position: absolute; top: 0; bottom: 0; width: 22%; z-index: 2;
+    }
+    #hitLeft { left: 0; }
+    #hitRight { right: 0; }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
+  <div id="chrome">
+    <div>
+      <div id="bookTitle">APDI 교재</div>
+      <div id="bookMeta">좌우 터치·스와이프 또는 이전/다음으로 넘기고, 두 손가락으로 확대할 수 있습니다.</div>
+    </div>
+    <button id="closeBtn" type="button">닫기</button>
+  </div>
   <div id="bar">
     <button id="prev" type="button">이전</button>
     <span id="status">불러오는 중…</span>
     <button id="next" type="button">다음</button>
   </div>
-  <div id="canvasWrap"><canvas id="pdfCanvas"></canvas></div>
+  <div id="stage">
+    <div id="hitLeft"></div>
+    <div id="pan"><div id="sheet"><canvas id="pdfCanvas"></canvas></div></div>
+    <div id="hitRight"></div>
+  </div>
   <script>
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     const params = new URLSearchParams(location.search);
     const file = params.get('file') || '';
+    const bookTitle = params.get('title') || 'APDI 교재';
+    const bookKey = params.get('bookKey') || bookTitle;
+    const standalone = params.get('standalone') === '1' || !!window.opener;
+    if (standalone) {
+      document.body.classList.add('standalone');
+      document.title = bookTitle;
+      document.getElementById('bookTitle').textContent = bookTitle;
+      document.getElementById('closeBtn').onclick = () => window.close();
+    }
     const canvas = document.getElementById('pdfCanvas');
     const status = document.getElementById('status');
     const prev = document.getElementById('prev');
     const next = document.getElementById('next');
+    const pan = document.getElementById('pan');
+    const sheet = document.getElementById('sheet');
     let pdf = null;
     let pageNum = 1;
+    let rendering = false;
+    let pendingPage = null;
+    let lastFitKey = '';
+    let userScale = 1;
+    let panX = 0;
+    let panY = 0;
+    let pointers = new Map();
+    let pinchStartDist = 0;
+    let pinchStartScale = 1;
+    let dragStart = null;
+    let swiping = false;
 
-    async function render() {
-      if (!pdf) return;
-      const page = await pdf.getPage(pageNum);
-      const wrap = document.getElementById('canvasWrap');
-      const scale = Math.max(0.8, (wrap.clientWidth - 16) / page.getViewport({ scale: 1 }).width);
-      const viewport = page.getViewport({ scale: scale });
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
-      status.textContent = pageNum + ' / ' + pdf.numPages;
-      prev.disabled = pageNum <= 1;
-      next.disabled = pageNum >= pdf.numPages;
+    function applyTransform() {
+      const s = Math.min(4, Math.max(1, userScale));
+      userScale = s;
+      if (s <= 1.01) {
+        userScale = 1;
+        panX = 0;
+        panY = 0;
+      }
+      sheet.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + userScale + ')';
     }
 
-    prev.onclick = () => { if (pageNum > 1) { pageNum--; render(); } };
-    next.onclick = () => { if (pdf && pageNum < pdf.numPages) { pageNum++; render(); } };
-    window.addEventListener('resize', () => render());
+    function notifyPage() {
+      if (!pdf) return;
+      const payload = { type: 'apdi-pdf-page', page: pageNum, pages: pdf.numPages, bookKey: bookKey };
+      try { parent.postMessage(payload, '*'); } catch (_) {}
+      try { if (window.opener && !window.opener.closed) window.opener.postMessage(payload, '*'); } catch (_) {}
+    }
+
+    function fitKey() {
+      const wrap = document.getElementById('stage');
+      const landscape = wrap.clientWidth > wrap.clientHeight;
+      return [Math.round(wrap.clientWidth / 8), Math.round(wrap.clientHeight / 8), landscape ? 'L' : 'P'].join('x');
+    }
+
+    async function render(force) {
+      if (!pdf) return;
+      if (rendering) {
+        pendingPage = pageNum;
+        return;
+      }
+      const key = fitKey();
+      if (!force && key === lastFitKey && canvas.width > 0) {
+        status.textContent = pageNum + ' / ' + pdf.numPages;
+        prev.disabled = pageNum <= 1;
+        next.disabled = pageNum >= pdf.numPages;
+        notifyPage();
+        return;
+      }
+      rendering = true;
+      try {
+        const page = await pdf.getPage(pageNum);
+        const wrap = document.getElementById('stage');
+        const landscape = wrap.clientWidth > wrap.clientHeight;
+        const base = page.getViewport({ scale: 1 });
+        const availW = Math.max(160, wrap.clientWidth - 24);
+        const availH = Math.max(160, wrap.clientHeight - 24);
+        const scale = landscape
+          ? Math.min(availW / base.width, availH / base.height)
+          : Math.min(availW / base.width, availH / base.height * 1.15);
+        const viewport = page.getViewport({ scale: Math.max(0.6, scale) });
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        canvas.style.width = viewport.width + 'px';
+        canvas.style.height = viewport.height + 'px';
+        await page.render({ canvasContext: canvas.getContext('2d', { alpha: false }), viewport: viewport }).promise;
+        lastFitKey = key;
+        userScale = 1;
+        panX = 0;
+        panY = 0;
+        applyTransform();
+        status.textContent = pageNum + ' / ' + pdf.numPages;
+        prev.disabled = pageNum <= 1;
+        next.disabled = pageNum >= pdf.numPages;
+        notifyPage();
+      } finally {
+        rendering = false;
+        if (pendingPage != null && pendingPage !== pageNum) {
+          const nextPending = pendingPage;
+          pendingPage = null;
+          pageNum = nextPending;
+          render(true);
+        } else {
+          pendingPage = null;
+        }
+      }
+    }
+
+    function go(delta) {
+      if (!pdf) return;
+      const nextNum = pageNum + delta;
+      if (nextNum < 1 || nextNum > pdf.numPages) return;
+      pageNum = nextNum;
+      userScale = 1;
+      panX = 0;
+      panY = 0;
+      lastFitKey = '';
+      render(true);
+    }
+
+    prev.onclick = () => go(-1);
+    next.onclick = () => go(1);
+    document.getElementById('hitLeft').onclick = (e) => { e.stopPropagation(); if (userScale <= 1.01) go(-1); };
+    document.getElementById('hitRight').onclick = (e) => { e.stopPropagation(); if (userScale <= 1.01) go(1); };
+
+    function pointerDistance() {
+      const pts = [...pointers.values()];
+      if (pts.length < 2) return 0;
+      const dx = pts[0].x - pts[1].x;
+      const dy = pts[0].y - pts[1].y;
+      return Math.hypot(dx, dy);
+    }
+
+    pan.addEventListener('pointerdown', (e) => {
+      pan.setPointerCapture(e.pointerId);
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pointers.size === 2) {
+        pinchStartDist = pointerDistance();
+        pinchStartScale = userScale;
+        swiping = false;
+        dragStart = null;
+      } else if (pointers.size === 1) {
+        dragStart = { x: e.clientX, y: e.clientY, panX: panX, panY: panY, t: Date.now() };
+        swiping = userScale <= 1.01;
+      }
+    });
+
+    pan.addEventListener('pointermove', (e) => {
+      if (!pointers.has(e.pointerId)) return;
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pointers.size >= 2 && pinchStartDist > 0) {
+        e.preventDefault();
+        userScale = pinchStartScale * (pointerDistance() / pinchStartDist);
+        applyTransform();
+        return;
+      }
+      if (dragStart && pointers.size === 1) {
+        const dx = e.clientX - dragStart.x;
+        const dy = e.clientY - dragStart.y;
+        if (userScale > 1.01) {
+          panX = dragStart.panX + dx;
+          panY = dragStart.panY + dy;
+          applyTransform();
+        }
+      }
+    });
+
+    function endPointer(e) {
+      const start = dragStart;
+      pointers.delete(e.pointerId);
+      if (pointers.size < 2) pinchStartDist = 0;
+      if (pointers.size === 0 && start && swiping && userScale <= 1.01) {
+        const dx = e.clientX - start.x;
+        const dy = e.clientY - start.y;
+        if (Math.abs(dx) > 56 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+          go(dx < 0 ? 1 : -1);
+        }
+      }
+      if (pointers.size === 0) {
+        dragStart = null;
+        swiping = false;
+      }
+    }
+
+    pan.addEventListener('pointerup', endPointer);
+    pan.addEventListener('pointercancel', endPointer);
+    pan.addEventListener('lostpointercapture', (e) => { pointers.delete(e.pointerId); });
+
+    let resizeTimer = 0;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const key = fitKey();
+        if (key !== lastFitKey) render(true);
+      }, 280);
+    });
+    window.addEventListener('orientationchange', () => {
+      userScale = 1;
+      panX = 0;
+      panY = 0;
+      lastFitKey = '';
+      setTimeout(() => render(true), 350);
+    });
 
     (async function () {
       if (!file) { status.textContent = 'PDF 주소가 없습니다.'; return; }
       try {
         pdf = await pdfjsLib.getDocument({ url: file, withCredentials: false }).promise;
         pageNum = 1;
-        await render();
+        await render(true);
       } catch (e) {
         status.textContent = 'PDF를 열 수 없습니다. CORS 또는 주소를 확인하세요.';
       }
