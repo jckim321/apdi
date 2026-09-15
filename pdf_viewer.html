@@ -10,16 +10,18 @@
       font-family: sans-serif; overflow: hidden;
     }
     button, #bar, #chrome { touch-action: manipulation; }
-    #chrome { display: none; padding: 10px 14px 8px; background: #0B132B; border-bottom: 1px solid #334155; }
+    #chrome { display: none; padding: calc(10px + env(safe-area-inset-top)) 14px 8px; background: #0B132B; border-bottom: 1px solid #334155; }
     body.standalone #chrome { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
     #bookTitle { font-size: 15px; font-weight: 700; color: #fff; }
     #bookMeta { font-size: 11px; color: #94a3b8; margin-top: 2px; }
-    #closeBtn { background: transparent; color: #94a3b8; padding: 4px 8px; }
+    #closeBtn, #downloadBtn {
+      background: #00FFC2; color: #0F172A; padding: 8px 12px; flex-shrink: 0;
+    }
     #bar {
       display: flex; align-items: center; gap: 8px; padding: 8px 10px;
       background: #1E293B; border-bottom: 1px solid #334155; flex-shrink: 0;
     }
-    body.standalone #stage { height: calc(100% - 118px); }
+    body.standalone #stage { height: calc(100% - 166px); }
     button {
       background: #00FFC2; color: #0F172A; border: 0; border-radius: 6px;
       padding: 6px 12px; font-weight: 700; cursor: pointer;
@@ -61,11 +63,13 @@
       <div id="bookTitle">APDI 교재</div>
       <div id="bookMeta">좌우 터치·스와이프 또는 이전/다음으로 넘기고, 두 손가락으로 확대할 수 있습니다.</div>
     </div>
-    <button id="closeBtn" type="button">닫기</button>
+    <button id="closeBtn" type="button">앱으로</button>
   </div>
   <div id="bar">
+    <button id="backBtn" type="button">닫기</button>
     <button id="prev" type="button">이전</button>
     <span id="status">불러오는 중…</span>
+    <button id="downloadBtn" type="button">저장</button>
     <button id="next" type="button">다음</button>
   </div>
   <div id="stage">
@@ -80,19 +84,46 @@
     const file = params.get('file') || '';
     const bookTitle = params.get('title') || 'APDI 교재';
     const bookKey = params.get('bookKey') || bookTitle;
-    const standalone = params.get('standalone') === '1' || !!window.opener;
-    if (standalone) {
-      document.body.classList.add('standalone');
-      document.title = bookTitle;
-      document.getElementById('bookTitle').textContent = bookTitle;
-      document.getElementById('closeBtn').onclick = () => {
+    const inIframe = (() => { try { return window !== window.top; } catch (_) { return true; } })();
+    const standalone = !inIframe;
+    function leaveReader() {
+      try {
         if (window.opener && !window.opener.closed) {
           window.close();
           return;
         }
-        location.replace(new URL('.', location.href).href);
-      };
+      } catch (_) {}
+      const appUrl = new URL('.', location.href).href;
+      if (history.length > 1) {
+        history.back();
+        setTimeout(() => {
+          if (location.pathname.indexOf('pdf_viewer') >= 0) location.replace(appUrl);
+        }, 400);
+        return;
+      }
+      location.replace(appUrl);
     }
+    function downloadPdf() {
+      if (!file) return;
+      const a = document.createElement('a');
+      a.href = file;
+      a.download = (bookTitle || 'APDI-manual').replace(/[\\/:*?"<>|]/g, '_') + '.pdf';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    if (standalone) {
+      document.body.classList.add('standalone');
+      document.title = bookTitle;
+      document.getElementById('bookTitle').textContent = bookTitle;
+    } else {
+      document.getElementById('backBtn').style.display = 'none';
+    }
+    document.getElementById('closeBtn').onclick = leaveReader;
+    document.getElementById('backBtn').onclick = leaveReader;
+    document.getElementById('downloadBtn').onclick = downloadPdf;
     const canvas = document.getElementById('pdfCanvas');
     const status = document.getElementById('status');
     const prev = document.getElementById('prev');
