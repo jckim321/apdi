@@ -336,12 +336,41 @@
 
     (async function () {
       if (!file) { status.textContent = 'PDF 주소가 없습니다.'; return; }
+      function driveId(u) {
+        const m = u.match(/\/d\/([a-zA-Z0-9_-]{10,})/) || u.match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
+        return m ? m[1] : '';
+      }
+      function isDrive(u) {
+        return /drive\.google\.com|docs\.google\.com/i.test(u);
+      }
+      function showFrame(src) {
+        const stage = document.getElementById('stage');
+        stage.innerHTML = '<iframe id="fallbackFrame" src="' + src.replace(/"/g, '') + '" style="width:100%;height:100%;border:0;background:#fff" allow="fullscreen"></iframe>';
+        prev.disabled = true;
+        next.disabled = true;
+        status.textContent = '교재 보기';
+      }
+      if (isDrive(file)) {
+        const id = driveId(file);
+        showFrame(id ? ('https://drive.google.com/file/d/' + id + '/preview') : file);
+        return;
+      }
       try {
-        pdf = await pdfjsLib.getDocument({ url: file, withCredentials: false }).promise;
+        pdf = await pdfjsLib.getDocument({
+          url: file,
+          withCredentials: false,
+          disableRange: true,
+          disableStream: true,
+          disableAutoFetch: true,
+        }).promise;
         pageNum = 1;
         await render(true);
       } catch (e) {
-        status.textContent = 'PDF를 열 수 없습니다. CORS 또는 주소를 확인하세요.';
+        try {
+          showFrame(file);
+        } catch (_) {
+          status.textContent = 'PDF를 열 수 없습니다. CORS 또는 주소를 확인하세요.';
+        }
       }
     })();
   </script>
