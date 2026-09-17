@@ -6,18 +6,20 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0F172A">
   <meta name="description" content="APDI 공식 스쿠버 & 프리다이빙 디지털 아카데미">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
-  <!-- iOS 아이폰 사파리 전용 PWA 설정 태그 -->
+  <!-- iOS: opaque status bar so top login icons are not under the notch -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="APDI">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <link rel="icon" type="image/png" href="favicon.png?v=20260917u"/>
+  <link rel="icon" type="image/png" href="favicon.png?v=20260917v"/>
   <link rel="manifest" href="manifest.json">
 
   <title>APDI SMART HUB</title>
@@ -26,14 +28,18 @@
       height: 100%;
       height: 100dvh;
       margin: 0;
-      padding: 0;
+      padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+      box-sizing: border-box;
       overflow: hidden;
       overscroll-behavior: none;
       background-color: #0A192F;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     flt-glass-pane, flutter-view, flt-scene-host {
       height: 100% !important;
       width: 100% !important;
+      touch-action: manipulation;
     }
   </style>
 </head>
@@ -51,7 +57,7 @@
         }
       } catch (e) {}
       const s = document.createElement('script');
-      s.src = 'flutter_bootstrap.js?v=20260917u';
+      s.src = 'flutter_bootstrap.js?v=20260917v';
       s.async = true;
       document.body.appendChild(s);
     })();
