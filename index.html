@@ -19,32 +19,51 @@
   <meta name="apple-mobile-web-app-title" content="APDI">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <link rel="icon" type="image/png" href="favicon.png?v=20260920b"/>
+  <link rel="icon" type="image/png" href="favicon.png?v=20260921a"/>
   <link rel="manifest" href="manifest.json">
 
   <title>APDI SMART HUB</title>
   <style>
+    /* Pin the Flutter shell so mobile rubber-band / address-bar resize cannot drag the page out of view. */
     html, body {
+      position: fixed;
+      inset: 0;
+      width: 100%;
       height: 100%;
-      height: 100dvh;
       margin: 0;
       padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
       box-sizing: border-box;
       overflow: hidden;
       overscroll-behavior: none;
+      overscroll-behavior-y: none;
+      overscroll-behavior-x: none;
       background-color: #0A192F;
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
     }
     flt-glass-pane, flutter-view, flt-scene-host {
+      position: relative;
       height: 100% !important;
       width: 100% !important;
+      overflow: hidden !important;
+      overscroll-behavior: none;
       touch-action: manipulation;
     }
   </style>
 </head>
 <body>
   <script>
+    (function () {
+      // Keep document scroll locked (Safari can still nudge the visual viewport).
+      var lock = function () {
+        if (window.scrollX !== 0 || window.scrollY !== 0) {
+          window.scrollTo(0, 0);
+        }
+      };
+      window.addEventListener('scroll', lock, { passive: true });
+      document.addEventListener('gesturestart', function (e) { e.preventDefault(); }, { passive: false });
+    })();
     (async function () {
       try {
         if ('serviceWorker' in navigator) {
@@ -57,7 +76,7 @@
         }
       } catch (e) {}
       const s = document.createElement('script');
-      s.src = 'flutter_bootstrap.js?v=20260920b';
+      s.src = 'flutter_bootstrap.js?v=20260921a';
       s.async = true;
       document.body.appendChild(s);
     })();
