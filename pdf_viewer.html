@@ -44,7 +44,7 @@
       touch-action: none;
     }
     #sheet {
-      transform-origin: 0 0;
+      transform-origin: center center;
       will-change: transform;
     }
     canvas { display: block; box-shadow: 0 8px 24px rgba(0,0,0,.35); background: #fff; }
@@ -194,13 +194,9 @@
       } else {
         clampPan();
       }
-      // Center the sheet in the stage, then pan/scale around center.
-      const stage = document.getElementById('stage');
-      const ox = (stage.clientWidth - cssW) / 2;
-      const oy = (stage.clientHeight - cssH) / 2;
+      // Flexbox centers #sheet; scale from center so zoom stays mid-screen.
       const tz = totalZoom();
-      sheet.style.transform =
-        'translate(' + (ox + panX) + 'px,' + (oy + panY) + 'px) scale(' + tz + ')';
+      sheet.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + tz + ')';
       const zoomed = tz > 1.05;
       hitLeft.classList.toggle('disabled', zoomed);
       hitRight.classList.toggle('disabled', zoomed);
@@ -231,6 +227,9 @@
         // Bake live pinch into settled zoom, then re-render sharp pixels.
         settledZoom = totalZoom();
         liveScale = 1;
+        if (settledZoom <= 1.05) { settledZoom = 1; panX = 0; panY = 0; }
+        // Keep page centered after zoom bake (user can pan afterward).
+        if (Math.abs(panX) < 8 && Math.abs(panY) < 8) { panX = 0; panY = 0; }
         lastFitKey = '';
         render(true);
       }, 180);
@@ -324,8 +323,10 @@
     }
 
     function bumpZoom(factor) {
-      settledZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, totalZoom() * factor));
+      const from = totalZoom();
+      settledZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, from * factor));
       liveScale = 1;
+      if (from <= 1.05) { panX = 0; panY = 0; }
       if (settledZoom <= 1.02) {
         settledZoom = 1;
         panX = 0;
