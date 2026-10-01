@@ -10460,7 +10460,7 @@ if(r>0&&q<1100)return!1
 return q>=900}catch(n){return!1}},
 btt(a,b,c,d){var s,r,q,p=A.bgT()
 if(!p&&!A.btr())return!1
-s=A.ju("pdf_viewer.html").IA(0,A.a9(["file",b,"title",d,"bookKey",a,"progress",""+c,"standalone","1"],t.N,t.z)).gno()
+s=A.ju("pdf_viewer.html").IA(0,A.a9(["file",b,"title",d,"bookKey",a,"progress",""+c,"standalone","1","v","20261001b"],t.N,t.z)).gno()
 r=window
 r.toString
 q=p?"_blank":"apdi_reader_"+B.c.gA(a)
@@ -60864,7 +60864,7 @@ q.aE()
 s="apdi-pdf-"+A.rt(q)+"-"+1000*Date.now()
 q.d!==$&&A.ba()
 q.d=s
-r=A.ju("pdf_viewer.html").IA(0,A.a9(["file",q.a.c],t.N,t.z)).gno()
+r=A.ju("pdf_viewer.html").IA(0,A.a9(["file",q.a.c,"v","20261001b"],t.N,t.z)).gno()
 q.e!==$&&A.ba()
 q.e=r
 $.baJ()
