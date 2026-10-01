@@ -362,9 +362,8 @@
       pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       if (pointers.size === 2) {
         pinchStartDist = Math.max(1, pointerDistance());
-        pinchStartScale = totalZoom() / Math.max(0.01, settledZoom);
-        // liveScale relative to settledZoom: total = settled * live
-        pinchStartScale = totalZoom() / settledZoom;
+        // liveScale is relative to settledZoom: total = settled * live
+        pinchStartScale = totalZoom() / Math.max(MIN_ZOOM, settledZoom);
         pinchMidStart = pointerMid();
         panStart = { x: panX, y: panY };
         swiping = false;
