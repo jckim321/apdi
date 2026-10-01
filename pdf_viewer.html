@@ -171,8 +171,9 @@
     }
 
     function clampPan() {
-      const z = totalZoom();
-      if (z <= 1.001 || !cssW || !cssH) {
+      // cssW/cssH already include settledZoom; only liveScale is CSS-transformed.
+      const z = Math.max(0.01, liveScale);
+      if (settledZoom <= 1.001 && liveScale <= 1.001 || !cssW || !cssH) {
         panX = 0;
         panY = 0;
         return;
@@ -185,8 +186,7 @@
     }
 
     function applyTransform() {
-      const z = totalZoom();
-      if (z <= 1.02) {
+      if (totalZoom() <= 1.02) {
         liveScale = 1;
         settledZoom = 1;
         panX = 0;
@@ -194,14 +194,13 @@
       } else {
         clampPan();
       }
-      // Flexbox centers #sheet; scale from center so zoom stays mid-screen.
-      const tz = totalZoom();
-      sheet.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + tz + ')';
-      const zoomed = tz > 1.05;
+      // Settled zoom is baked into canvas CSS size; liveScale is pinch-only.
+      sheet.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + liveScale + ')';
+      const zoomed = totalZoom() > 1.05;
       hitLeft.classList.toggle('disabled', zoomed);
       hitRight.classList.toggle('disabled', zoomed);
-      zoomOutBtn.disabled = tz <= 1.01;
-      zoomInBtn.disabled = tz >= MAX_ZOOM - 0.01;
+      zoomOutBtn.disabled = totalZoom() <= 1.01;
+      zoomInBtn.disabled = totalZoom() >= MAX_ZOOM - 0.01;
     }
 
     function notifyPage() {
@@ -217,22 +216,33 @@
         Math.round(wrap.clientWidth / 8),
         Math.round(wrap.clientHeight / 8),
         Math.round(settledZoom * 10),
-        Math.round(dpr() * 10)
+        Math.round(dpr() * 10),
+        document.getElementById('stage').clientWidth > document.getElementById('stage').clientHeight ? 'L' : 'P'
       ].join('x');
+    }
+
+    function commitZoom(nextZoom) {
+      nextZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, nextZoom));
+      if (nextZoom <= 1.05) {
+        settledZoom = 1;
+        liveScale = 1;
+        panX = 0;
+        panY = 0;
+      } else {
+        // Keep settledZoom (canvas CSS) until render finishes; liveScale holds the gap.
+        liveScale = nextZoom / Math.max(MIN_ZOOM, settledZoom);
+      }
+      if (Math.abs(panX) < 8 && Math.abs(panY) < 8) { panX = 0; panY = 0; }
+      applyTransform();
+      scheduleHiRes();
     }
 
     function scheduleHiRes() {
       clearTimeout(hiResTimer);
       hiResTimer = setTimeout(() => {
-        // Bake live pinch into settled zoom, then re-render sharp pixels.
-        settledZoom = totalZoom();
-        liveScale = 1;
-        if (settledZoom <= 1.05) { settledZoom = 1; panX = 0; panY = 0; }
-        // Keep page centered after zoom bake (user can pan afterward).
-        if (Math.abs(panX) < 8 && Math.abs(panY) < 8) { panX = 0; panY = 0; }
         lastFitKey = '';
         render(true);
-      }, 180);
+      }, 160);
     }
 
     async function render(force) {
@@ -258,35 +268,44 @@
         const page = await pdf.getPage(pageNum);
         const wrap = document.getElementById('stage');
         const base = page.getViewport({ scale: 1 });
-        const availW = Math.max(160, wrap.clientWidth - 20);
-        const availH = Math.max(160, wrap.clientHeight - 20);
+        const availW = Math.max(120, wrap.clientWidth - 16);
+        const availH = Math.max(120, wrap.clientHeight - 16);
+        const landscape = wrap.clientWidth > wrap.clientHeight;
         const fit = Math.min(availW / base.width, availH / base.height);
-        const zoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, settledZoom));
-        // CSS display size = fit-to-screen; bitmap = fit * zoom * dpr for sharp zoom.
-        cssW = base.width * fit;
-        cssH = base.height * fit;
-        let pixelScale = fit * zoom * dpr();
+        // Visual zoom (settled * live); bake into CSS+bitmap so landscape stays sharp.
+        const zoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, settledZoom * liveScale));
+        cssW = base.width * fit * zoom;
+        cssH = base.height * fit * zoom;
+        // Extra pixel density in landscape (short viewport) to keep text crisp.
+        const pixelRatio = Math.min(dpr() * (landscape ? 1.35 : 1), 3.5);
+        let pixelScale = fit * zoom * pixelRatio;
         let viewport = page.getViewport({ scale: pixelScale });
-        const maxPx = 4096;
-        const biggest = Math.max(viewport.width, viewport.height);
-        if (biggest > maxPx) {
-          pixelScale *= maxPx / biggest;
+        // iOS canvas soft-limit ~16MP / long-edge; keep under to avoid silent fail.
+        const maxPx = landscape ? 6144 : 5120;
+        const maxArea = 16 * 1024 * 1024;
+        let biggest = Math.max(viewport.width, viewport.height);
+        let area = viewport.width * viewport.height;
+        if (biggest > maxPx || area > maxArea) {
+          const byEdge = biggest > maxPx ? maxPx / biggest : 1;
+          const byArea = area > maxArea ? Math.sqrt(maxArea / area) : 1;
+          pixelScale *= Math.min(byEdge, byArea);
           viewport = page.getViewport({ scale: pixelScale });
         }
         canvas.width = Math.floor(viewport.width);
         canvas.height = Math.floor(viewport.height);
         canvas.style.width = cssW + 'px';
         canvas.style.height = cssH + 'px';
+        // CSS size now includes zoom — drop liveScale in the same frame to avoid double-scale.
+        settledZoom = zoom <= 1.05 ? 1 : zoom;
+        liveScale = 1;
+        applyTransform();
         const ctx = canvas.getContext('2d', { alpha: false });
         ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
+        ctx.imageSmoothingEnabled = false;
         renderTask = page.render({ canvasContext: ctx, viewport: viewport });
         await renderTask.promise;
         renderTask = null;
-        lastFitKey = key;
-        liveScale = 1;
-        applyTransform();
+        lastFitKey = fitKey();
         status.textContent = pageNum + ' / ' + pdf.numPages + (zoom > 1.05 ? (' · ' + Math.round(zoom * 100) + '%') : '');
         prev.disabled = pageNum <= 1;
         next.disabled = pageNum >= pdf.numPages;
@@ -323,17 +342,8 @@
     }
 
     function bumpZoom(factor) {
-      const from = totalZoom();
-      settledZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, from * factor));
-      liveScale = 1;
-      if (from <= 1.05) { panX = 0; panY = 0; }
-      if (settledZoom <= 1.02) {
-        settledZoom = 1;
-        panX = 0;
-        panY = 0;
-      }
-      applyTransform();
-      scheduleHiRes();
+      if (totalZoom() <= 1.05) { panX = 0; panY = 0; }
+      commitZoom(totalZoom() * factor);
     }
 
     prev.onclick = () => go(-1);
@@ -373,12 +383,7 @@
         const now = Date.now();
         if (now - lastTapAt < 280 && totalZoom() > 1.05) {
           // Double-tap reset
-          liveScale = 1;
-          settledZoom = 1;
-          panX = 0;
-          panY = 0;
-          applyTransform();
-          scheduleHiRes();
+          commitZoom(1);
           lastTapAt = 0;
         } else {
           lastTapAt = now;
@@ -419,19 +424,10 @@
       try { pan.releasePointerCapture(e.pointerId); } catch (_) {}
       if (pointers.size < 2) {
         if (pinchStartDist > 0) {
-          // Pinch ended: bake zoom and refresh bitmap
-          settledZoom = totalZoom();
-          liveScale = 1;
-          if (settledZoom <= 1.05) {
-            settledZoom = 1;
-            panX = 0;
-            panY = 0;
-          }
           pinchStartDist = 0;
           pinchMidStart = null;
           panStart = null;
-          applyTransform();
-          scheduleHiRes();
+          commitZoom(totalZoom());
         }
       }
       if (!cancelled && pointers.size === 0 && start && swiping && totalZoom() <= 1.05) {
@@ -462,15 +458,7 @@
     pan.addEventListener('wheel', (e) => {
       e.preventDefault();
       const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
-      settledZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, totalZoom() * factor));
-      liveScale = 1;
-      if (settledZoom <= 1.02) {
-        settledZoom = 1;
-        panX = 0;
-        panY = 0;
-      }
-      applyTransform();
-      scheduleHiRes();
+      commitZoom(totalZoom() * factor);
     }, { passive: false });
 
     let resizeTimer = 0;
@@ -487,7 +475,9 @@
       panX = 0;
       panY = 0;
       lastFitKey = '';
-      setTimeout(() => render(true), 350);
+      setTimeout(() => {
+        requestAnimationFrame(() => requestAnimationFrame(() => render(true)));
+      }, 450);
     });
 
     (async function () {
