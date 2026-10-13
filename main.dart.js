@@ -40695,7 +40695,7 @@ case 2:return A.u(null,r)}})
 return A.v($async$Xc,r)},
 bD_(){var s,r=window
 r.toString
-s=B.b.t("")
+s=B.b.t("https://pf.kakao.com/_sixjSX/chat")
 B.f1.IT(r,s.length===0?"https://jckim321.github.io/apdi/guides/talk.html":s,"_blank")},
 bIK(){var s,r="b689aebfde9481216c0e085f3ac7de7a.r2.cloudflarestorage.com",q=new A.aCh(r,443,!0,"37f85a38e5a591fb39a46a8511d2a58f","02fd95531dd7a1a97319f4cf00fe64bc4514773d608a4d5ccc9f225ce565a607","auto",A.A(t.C,t.N))
 if(!(A.bR_(r)||A.bR0(r)))A.a9(new A.a1V("End point b689aebfde9481216c0e085f3ac7de7a.r2.cloudflarestorage.com is not a valid domain or ip address"))
