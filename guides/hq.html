@@ -16,6 +16,7 @@
     .card { background:#fff; border:1px solid #E2E8F0; border-radius:12px; padding:16px 18px; margin:12px 0; }
     .tip { background:#0B132B; color:#E2E8F0; border-radius:12px; padding:14px 16px; }
     .tip strong { color:var(--accent); }
+    .menu { font-family: ui-monospace, monospace; font-size:0.92em; background:#F1F5F9; padding:1px 6px; border-radius:4px; }
     .print { margin-top:28px; font-size:0.85rem; color:var(--muted); }
     @media print { .print { display:none; } }
   </style>
@@ -23,15 +24,16 @@
 <body>
   <div class="wrap">
     <h1>APDI SMART HUB · 본부(HQ) 안내</h1>
-    <p class="sub">버전 2026.10 · C-Card 템플릿 · 교재 · 크레딧 · 발급 관제를 총괄합니다.</p>
+    <p class="sub">버전 2026.10 · 상단 방패(HQ) 아이콘 · 마스터 PIN으로 본부 전산망 접속. C-Card 템플릿 · 교재 · 크레딧 · 발급 관제를 총괄합니다.</p>
 
-    <div class="tip"><strong>한 줄 흐름</strong><br>HQ 로그인 → 템플릿·분류·코드 정리 → 교재 연동 → 운영·크레딧</div>
+    <div class="tip"><strong>한 줄 흐름</strong><br>HQ 로그인 → C-Card 템플릿(분류·코드) → 교재 연동 → 운영·크레딧·매출</div>
 
     <h2>1. 로그인</h2>
     <div class="card">
       <ul>
-        <li>상단 HQ 아이콘으로 <strong>본부 로그인</strong></li>
-        <li>지식·인력·관제 등 커맨드 메뉴를 사용합니다</li>
+        <li>상단 <strong>방패(HQ) 아이콘</strong>으로 본부 로그인 (마스터 PIN)</li>
+        <li>지식·인력·관제 등 HQ 커맨드 메뉴를 사용합니다</li>
+        <li>앱 홈 하단 <strong>사용안내</strong>로 역할별 안내서를 다시 열 수 있습니다</li>
       </ul>
     </div>
 
@@ -40,7 +42,7 @@
       <ol>
         <li>종목명 · 영문명 · <strong>분류</strong>(스쿠버/프리/테크/스페셜티) · <strong>연동 코드</strong>를 정확히 둡니다</li>
         <li>다이버/강사 짝 종목은 코드를 분리합니다 (예: NITROX / NITROX_INST)</li>
-        <li>앞·뒷면 배경을 등록하면 지갑·발급에 연결됩니다</li>
+        <li>정렬 순서·앞·뒷면 배경을 등록하면 교육생 신청 목록·지갑·발급에 연결됩니다</li>
       </ol>
     </div>
 
@@ -49,7 +51,16 @@
       <ul>
         <li>필수 교재는 템플릿과 <strong>같은 분류·종목명·연동 코드</strong>로 저장합니다</li>
         <li>보조교자재는 코스 자동 지급 대상이 아니며, 관련 자격은 선택 사항입니다</li>
-        <li>기념품은 별도 기념품 화면에서 관리합니다</li>
+        <li>기념품은 교재 목록과 분리된 <strong>기념품</strong> 화면에서 관리합니다</li>
+        <li>교육생 앱의 <span class="menu">교재보기</span> / <span class="menu">내서재</span>에 반영됩니다</li>
+      </ul>
+    </div>
+
+    <h2>4. 운영</h2>
+    <div class="card">
+      <ul>
+        <li>발급 결재·강사 명부·크레딧·매출 전표를 HQ 메뉴에서 확인합니다</li>
+        <li>템플릿·교재 코드를 바꾸면 기존 연동이 어긋날 수 있으니 일괄 정리 후 저장하세요</li>
       </ul>
     </div>
 
