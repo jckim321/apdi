@@ -71677,7 +71677,7 @@ A.ayW.prototype={
 $1(a){return this.a.xU(a)},
 $S:9}
 A.a02.prototype={
-I(a){var s=this,r=null,q=t.p,p=A.a([],q),o=A.U(18),n=t.V,m=A.a([new A.cb(0,B.ad,A.Y(71,B.fl.n()>>>16&255,B.fl.n()>>>8&255,B.fl.n()&255),B.hZ,16)],n),l=A.U(18),k=A.MK(0,A.KL("assets/hub_scuba_bg.jpg",B.JR,new A.avw(),B.b6,r,r)),j=A.MK(0,A.pU(r,new A.aj(r,r,r,r,r,new A.im(B.bW,B.cJ,B.c3,A.a([B.NN,B.OU,B.Po,A.Y(13,B.p.n()>>>16&255,B.p.n()>>>8&255,B.p.n()&255)],t.t_),B.a_P,r),B.r),B.dM)),i=A.MK(0,new A.du(B.JP,r,r,A.KL("assets/hub_tech_diver.png",B.G,new A.avx(),B.nw,120,r),r)),h=A.MK(0,new A.du(B.JS,r,r,A.KL("assets/hub_free_diver.png",B.G,new A.avy(),B.nw,108,r),r)),g=A.af(r,B.akE,B.j,r,r,new A.aj(B.ho,r,r,A.U(20),r,r,B.r),r,r,r,r,B.Rq,r,r,r),f=A.b5(B.ho,1.6)
+I(a){var s=this,r=null,q=t.p,p=A.a([],q),o=A.U(18),n=t.V,m=A.a([new A.cb(0,B.ad,A.Y(71,B.fl.n()>>>16&255,B.fl.n()>>>8&255,B.fl.n()&255),B.hZ,16)],n),l=A.U(18),k=A.MK(0,A.KL("assets/hub_scuba_bg.jpg",B.JS,new A.avw(),B.b6,r,r)),j=A.MK(0,A.pU(r,new A.aj(r,r,r,r,r,new A.im(B.bW,B.cJ,B.c3,A.a([B.NN,B.OU,B.Po,A.Y(13,B.p.n()>>>16&255,B.p.n()>>>8&255,B.p.n()&255)],t.t_),B.a_P,r),B.r),B.dM)),i=A.MK(0,new A.du(B.JP,r,r,A.KL("assets/hub_tech_diver.png",B.G,new A.avx(),B.nw,120,r),r)),h=A.MK(0,new A.du(B.JQ,r,r,A.KL("assets/hub_free_diver.png",B.G,new A.avy(),B.nw,108,r),r)),g=A.af(r,B.akE,B.j,r,r,new A.aj(B.ho,r,r,A.U(20),r,r,B.r),r,r,r,r,B.Rq,r,r,r),f=A.b5(B.ho,1.6)
 n=A.a([new A.cb(0,B.ad,A.Y(71,B.p.n()>>>16&255,B.p.n()>>>8&255,B.p.n()&255),B.hX,8)],n)
 p.push(A.af(r,A.ek(l,new A.fm(B.ch,r,B.cc,B.i,A.a([k,j,i,h,new A.ad(B.cz,A.a_(A.a([A.aq(A.a([g,A.af(r,A.bl1(A.KL("assets/apdi_logo_circle.png",B.G,new A.avz(),B.b6,r,r)),B.j,r,r,new A.aj(r,r,f,r,n,r,B.eA),r,46,r,r,r,r,r,46)],q),B.n,B.cn,B.f,0,r,r),B.w,B.aib,B.a5,A.l(A.ba("\uad50\uc7ac \ud559\uc2b5 \u2794 \uc9c0\uc2dd \ud3c9\uac00 \ud569\uaca9 \u2794 C-Card \uc2e4\uc2dc\uac04 \uc790\ub3d9 \ubc1c\uae09!\n\ub514\uc9c0\ud138 \ub85c\uadf8\ubd81\uc73c\ub85c \ub2e4\uc774\ube59 \uae30\ub85d\uae4c\uc9c0 \uad00\ub9ac\ud558\uc138\uc694.","Study manuals \u2192 pass knowledge review \u2192 get your C-Card.\nTrack dives in the digital logbook."),r,r,r,r,B.aeO,r,r,r),B.aa3],q),B.t,B.e,B.f),r)],q),r),B.ao),B.j,r,r,new A.aj(r,r,r,o,m,r,B.r),r,r,r,r,r,r,r,r))
 p.push(B.cD)
@@ -96544,7 +96544,7 @@ A.bch.prototype={
 $1(a){this.a.M(t.q).f.ac5(B.aab)},
 $S:584}
 A.bcj.prototype={
-$3(a,b,c){return new A.du(B.JQ,null,b,c,null)},
+$3(a,b,c){return new A.du(B.JR,null,b,c,null)},
 $S:294}
 A.bck.prototype={
 $3(a,b,c){return new A.du(B.ch,null,b,c,null)},
@@ -141456,11 +141456,11 @@ B.dE=new A.fq(0,1)
 B.d6=new A.fq(0,-1)
 B.cJ=new A.fq(1,0)
 B.t2=new A.fq(1,1)
-B.JP=new A.fq(-0.9,0.72)
-B.JQ=new A.fq(-1,1)
+B.JP=new A.fq(-1.05,0.72)
+B.JQ=new A.fq(0.28,0.58)
+B.JR=new A.fq(-1,1)
 B.e1=new A.fq(-1,-1)
-B.JR=new A.fq(0.4,0)
-B.JS=new A.fq(0.02,0.58)
+B.JS=new A.fq(0.4,0)
 B.iG=new A.X2(null)
 B.m=new A.F(1,0,1,0.7607843137254902,B.k)
 B.JT=new A.B3(B.m,t.ZU)
