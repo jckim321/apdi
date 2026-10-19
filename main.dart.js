@@ -72353,7 +72353,8 @@ return"scuba"},
 aF8(a,b){var s,r=a.h(0,"membershipPaidPercent")
 if(typeof r=="number"){s=B.e.bM(r)
 if(s>=100)return"100"
-if(s>=50)return"50"}return b==="Active"?"100":"0"},
+if(s>=50)return"50"
+return"0"}return b==="Active"?"100":"0"},
 aFb(a){var s,r,q,p,o,n,m,l,k=this,j=null,i=a.a_(0)
 i.toString
 t.P.a(i)
