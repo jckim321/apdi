@@ -10562,7 +10562,7 @@ aoJ:function aoJ(){},
 aoI:function aoI(a){this.a=a},
 aoK:function aoK(){},
 aoL:function aoL(){},
-bKY(){if($.kr)return A.au("\uc9c0\uc5ed\ubcf8\ubd80 \uc0c1\ub2f4: \ud15c\ud50c\ub9bf\xb7\uad50\uc7ac \ucf54\ub4dc, \uac15\uc0ac \ud06c\ub808\ub527 \ucda9\uc804, \ubc1c\uae09 \uacb0\uc7ac\ub97c \uc54c\ub824 \uc8fc\uc2dc\uba74 \u66f4\u5feb \ub3c4\uc640\ub4dc\ub9b4 \uc218 \uc788\uc2b5\ub2c8\ub2e4.","HQ tip: mention templates, instructor credit top-up, or issuance approval.")
+bKY(){if($.kr)return A.au("\uc9c0\uc5ed\ubcf8\ubd80 \uc0c1\ub2f4: \ud15c\ud50c\ub9bf\xb7\uad50\uc7ac \ucf54\ub4dc, \uac15\uc0ac \ud06c\ub808\ub527 \ucda9\uc804, \ubc1c\uae09 \uacb0\uc7ac\ub97c \uc54c\ub824 \uc8fc\uc2dc\uba74 \ub354 \ube60\ub974\uac8c \ub3c4\uc640\ub4dc\ub9b4 \uc218 \uc788\uc2b5\ub2c8\ub2e4.","HQ tip: mention templates, instructor credit top-up, or issuance approval.")
 if($.bu)return A.au("\uac15\uc0ac \uc0c1\ub2f4: \ubc1c\uae09 \ud06c\ub808\ub527\xb7\uc0c1\uc815\xb7\ub85c\uadf8\ubd81 \uc11c\uba85 \uad00\ub828\uc774\uba74 \uc794\uc561/\uc885\ubaa9\uc744 \ud568\uaed8 \uc54c\ub824 \uc8fc\uc138\uc694.","Instructor tip: for credits or issuance, include balance and course name.")
 return A.au("\uad50\uc721\uc0dd \uc0c1\ub2f4: \ub2f4\ub2f9 \uac15\uc0ac\ub97c \ubaa8\ub974\uc2dc\uba74 \uac15\uc0ac \ubc88\ud638 101\ub85c \ub4f1\ub85d\ud55c \ub4a4 \uacfc\uc815\uc744 \uc2e0\uccad\ud574 \uc8fc\uc138\uc694.","Student tip: if you do not know your instructor, register with number 101.")},
 Y6(a){var s=0,r=A.t(t.H),q,p,o,n
