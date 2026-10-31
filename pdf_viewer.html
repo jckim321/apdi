@@ -65,21 +65,21 @@
 <body>
   <div id="chrome">
     <div>
-      <div id="bookTitle">APDI 교재</div>
-      <div id="bookMeta">좌우 넘김 · 두 손가락 확대/축소 · +/− 버튼 · 더블탭으로 원배율</div>
+      <div id="bookTitle">APDI Manual</div>
+      <div id="bookMeta"></div>
     </div>
-    <button id="closeBtn" type="button">앱으로</button>
+    <button id="closeBtn" type="button">Back</button>
   </div>
   <div id="bar">
-    <button id="backBtn" type="button">닫기</button>
-    <button id="prev" type="button">이전</button>
-    <button id="zoomOut" type="button" title="축소">−</button>
-    <span id="status">불러오는 중…</span>
-    <input id="pageJump" type="number" min="1" inputmode="numeric" title="페이지 번호" placeholder="쪽" />
-    <button id="goPage" type="button">이동</button>
-    <button id="zoomIn" type="button" title="확대">+</button>
-    <button id="downloadBtn" type="button">저장</button>
-    <button id="next" type="button">다음</button>
+    <button id="backBtn" type="button">Close</button>
+    <button id="prev" type="button">Prev</button>
+    <button id="zoomOut" type="button" title="Zoom out">−</button>
+    <span id="status">Loading…</span>
+    <input id="pageJump" type="number" min="1" inputmode="numeric" title="Page" placeholder="Pg" />
+    <button id="goPage" type="button">Go</button>
+    <button id="zoomIn" type="button" title="Zoom in">+</button>
+    <button id="downloadBtn" type="button">Save</button>
+    <button id="next" type="button">Next</button>
   </div>
   <div id="stage">
     <div id="hitLeft"></div>
@@ -94,8 +94,25 @@
     const bookTitle = params.get('title') || 'APDI 교재';
     const bookKey = params.get('bookKey') || bookTitle;
     const initialPageParam = Math.max(1, parseInt(params.get('page') || '1', 10) || 1);
+    const isEn = (params.get('lang') || 'ko') === 'en';
+    const L = (ko, en) => (isEn ? en : ko);
     const inIframe = (() => { try { return window !== window.top; } catch (_) { return true; } })();
     const standalone = !inIframe;
+    document.getElementById('bookMeta').textContent = L(
+      '좌우 넘김 · 두 손가락 확대/축소 · +/− 버튼 · 더블탭으로 원배율',
+      'Swipe · pinch zoom · +/− · double-tap reset'
+    );
+    document.getElementById('closeBtn').textContent = L('앱으로', 'Back');
+    document.getElementById('backBtn').textContent = L('닫기', 'Close');
+    document.getElementById('prev').textContent = L('이전', 'Prev');
+    document.getElementById('next').textContent = L('다음', 'Next');
+    document.getElementById('goPage').textContent = L('이동', 'Go');
+    document.getElementById('downloadBtn').textContent = L('저장', 'Save');
+    document.getElementById('zoomOut').title = L('축소', 'Zoom out');
+    document.getElementById('zoomIn').title = L('확대', 'Zoom in');
+    document.getElementById('pageJump').placeholder = L('쪽', 'Pg');
+    document.getElementById('pageJump').title = L('페이지 번호', 'Page');
+    document.getElementById('status').textContent = L('불러오는 중…', 'Loading…');
     function leaveReader() {
       try {
         const payload = { type: 'apdi-pdf-close', bookKey: bookKey, page: pageNum, pages: pdf ? pdf.numPages : 0 };
@@ -530,7 +547,7 @@
     });
 
     (async function () {
-      if (!file) { status.textContent = 'PDF 주소가 없습니다.'; return; }
+      if (!file) { status.textContent = L('PDF 주소가 없습니다.', 'No PDF URL.'); return; }
       function driveId(u) {
         const m = u.match(/\/d\/([a-zA-Z0-9_-]{10,})/) || u.match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
         return m ? m[1] : '';
@@ -545,7 +562,7 @@
         next.disabled = true;
         zoomInBtn.disabled = true;
         zoomOutBtn.disabled = true;
-        status.textContent = '교재 보기';
+        status.textContent = L('교재 보기', 'Viewing');
       }
       if (isDrive(file)) {
         const id = driveId(file);
@@ -567,7 +584,7 @@
         try {
           showFrame(file);
         } catch (_) {
-          status.textContent = 'PDF를 열 수 없습니다. CORS 또는 주소를 확인하세요.';
+          status.textContent = L('PDF를 열 수 없습니다. CORS 또는 주소를 확인하세요.', 'Could not open PDF. Check CORS or URL.');
         }
       }
     })();
