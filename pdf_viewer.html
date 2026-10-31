@@ -28,6 +28,11 @@
     }
     button:disabled { opacity: .4; cursor: default; }
     #status { font-size: 12px; color: #94a3b8; flex: 1; text-align: center; white-space: nowrap; }
+    #pageJump {
+      width: 52px; background: #0F172A; color: #e2e8f0; border: 1px solid #334155;
+      border-radius: 6px; padding: 5px 6px; font-size: 13px; text-align: center;
+    }
+    #goPage { padding: 6px 8px; font-size: 12px; }
     #stage {
       height: calc(100% - 46px);
       overflow: hidden;
@@ -70,6 +75,8 @@
     <button id="prev" type="button">이전</button>
     <button id="zoomOut" type="button" title="축소">−</button>
     <span id="status">불러오는 중…</span>
+    <input id="pageJump" type="number" min="1" inputmode="numeric" title="페이지 번호" placeholder="쪽" />
+    <button id="goPage" type="button">이동</button>
     <button id="zoomIn" type="button" title="확대">+</button>
     <button id="downloadBtn" type="button">저장</button>
     <button id="next" type="button">다음</button>
@@ -86,9 +93,15 @@
     const file = params.get('file') || '';
     const bookTitle = params.get('title') || 'APDI 교재';
     const bookKey = params.get('bookKey') || bookTitle;
+    const initialPageParam = Math.max(1, parseInt(params.get('page') || '1', 10) || 1);
     const inIframe = (() => { try { return window !== window.top; } catch (_) { return true; } })();
     const standalone = !inIframe;
     function leaveReader() {
+      try {
+        const payload = { type: 'apdi-pdf-close', bookKey: bookKey, page: pageNum, pages: pdf ? pdf.numPages : 0 };
+        try { parent.postMessage(payload, '*'); } catch (_) {}
+        try { if (window.opener && !window.opener.closed) window.opener.postMessage(payload, '*'); } catch (_) {}
+      } catch (_) {}
       try {
         if (window.opener && !window.opener.closed) {
           window.close();
@@ -205,6 +218,8 @@
 
     function notifyPage() {
       if (!pdf) return;
+      const jumpInput = document.getElementById('pageJump');
+      if (jumpInput && document.activeElement !== jumpInput) jumpInput.value = String(pageNum);
       const payload = { type: 'apdi-pdf-page', page: pageNum, pages: pdf.numPages, bookKey: bookKey };
       try { parent.postMessage(payload, '*'); } catch (_) {}
       try { if (window.opener && !window.opener.closed) window.opener.postMessage(payload, '*'); } catch (_) {}
@@ -332,12 +347,25 @@
       lastGoAt = now;
       const nextNum = pageNum + delta;
       if (nextNum < 1 || nextNum > pdf.numPages) return;
+      goToPage(nextNum);
+    }
+
+    function goToPage(target) {
+      if (!pdf) return;
+      const nextNum = Math.min(pdf.numPages, Math.max(1, target | 0));
+      if (nextNum === pageNum) {
+        const jumpInput = document.getElementById('pageJump');
+        if (jumpInput) jumpInput.value = String(pageNum);
+        return;
+      }
       pageNum = nextNum;
       liveScale = 1;
       settledZoom = 1;
       panX = 0;
       panY = 0;
       lastFitKey = '';
+      const jumpInput = document.getElementById('pageJump');
+      if (jumpInput) jumpInput.value = String(pageNum);
       render(true);
     }
 
@@ -352,6 +380,27 @@
     zoomOutBtn.onclick = () => bumpZoom(1 / 1.35);
     hitLeft.onclick = (e) => { e.stopPropagation(); if (totalZoom() <= 1.05) go(-1); };
     hitRight.onclick = (e) => { e.stopPropagation(); if (totalZoom() <= 1.05) go(1); };
+    const pageJumpInput = document.getElementById('pageJump');
+    const goPageBtn = document.getElementById('goPage');
+    function jumpFromInput() {
+      const n = parseInt((pageJumpInput && pageJumpInput.value) || '', 10);
+      if (!n) return;
+      goToPage(n);
+    }
+    if (goPageBtn) goPageBtn.onclick = jumpFromInput;
+    if (pageJumpInput) {
+      pageJumpInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); jumpFromInput(); }
+      });
+    }
+    window.addEventListener('message', (e) => {
+      try {
+        const data = e.data || {};
+        if (data.type !== 'apdi-pdf-goto') return;
+        const n = parseInt(data.page, 10);
+        if (n > 0) goToPage(n);
+      } catch (_) {}
+    });
 
     function pointerDistance() {
       const pts = [...pointers.values()];
@@ -511,7 +560,8 @@
           disableStream: true,
           disableAutoFetch: true,
         }).promise;
-        pageNum = 1;
+        pageNum = Math.min(pdf.numPages, Math.max(1, initialPageParam));
+        if (pageJumpInput) pageJumpInput.value = String(pageNum);
         await render(true);
       } catch (e) {
         try {
