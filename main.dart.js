@@ -9818,49 +9818,49 @@ s=1
 break
 case 1:return A.p(q,r)}})
 return A.q($async$qC,r)},
-a_B(a,b,c,d,e,f,g,h,i){return A.bSj(a,b,c,d,e,f,g,h,i)},
-bSj(a1,a2,a3,a4,a5,a6,a7,a8,a9){var s=0,r=A.r(t.H),q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0
-var $async$a_B=A.n(function(b0,b1){if(b0===1)return A.o(b1,r)
+a_B(a,b,c,d,e,f,g,h,i,j){return A.bSj(a,b,c,d,e,f,g,h,i,j)},
+bSj(a1,a2,a3,a4,a5,a6,a7,a8,a9,b0){var s=0,r=A.r(t.H),q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0
+var $async$a_B=A.n(function(b1,b2){if(b1===1)return A.o(b2,r)
 for(;;)switch(s){case 0:b={}
 a=$.u
 a0=(a==null?$.u=$.a2():a).P("[DEFAULT]")
 A.W(a0,$.ab(),!0)
-q=A.a8(new A.a_(a0)).T("exam_records").aC(A.bEF(a8,a2))
+q=A.a8(new A.a_(a0)).T("exam_records").aC(A.bEF(a9,a2))
 s=2
 return A.e(q.b9(0),$async$a_B)
-case 2:p=b1.aK(0)
+case 2:p=b2.aK(0)
 if(p==null)p=A.A(t.N,t.z)
 o=a3?"final":"practice"
 a=t.N
-n=A.dS(a5,!0,a)
-b.a=A.dS(a4,!0,a)
-m=A.dS(a6,!0,a)
-l=a6.length
+n=A.dS(a6,!0,a)
+b.a=A.dS(a5,!0,a)
+m=A.dS(a7,!0,a)
+l=a7.length
 if(l!==0){l=J.ag(p)
 k=l.h(p,o+"PaperIds")
 m=A.dS(k==null?B.a3:k,!0,a)
-if(m.length===0)m=A.dS(a6,!0,a)
+if(m.length===0)m=A.dS(a7,!0,a)
 l=l.h(p,o+"CorrectIds")
 j=b.a=A.dS(l==null?B.a3:l,!0,a)
-i=A.dS(a6,!0,a)
+i=A.dS(a7,!0,a)
 l=B.c.gmD(i)
 h=new A.a4(m,l,A.I(m).i("a4<1>")).gE(0)
 if(m.length!==0&&i.length!==0&&h===0){l=new A.E(j,new A.ar8(i),A.I(j).i("E<1,d>")).jT(0,l)
 l=A.eX(l,l.$ti.i("B.E"))
 j=A.L(l,A.x(l).c)
 b.a=j
-m=i}l=a4.length
+m=i}l=a5.length
 g=0
-for(;g<a4.length;a4.length===l||(0,A.C)(a4),++g){f=a4[g]
+for(;g<a5.length;a5.length===l||(0,A.C)(a5),++g){f=a5[g]
 if(!B.c.l(b.a,f))B.c.B(b.a,f)}l=A.I(m).i("a4<1>")
 n=A.L(new A.a4(m,new A.ar7(b),l),l.i("B.E"))
 l=m.length
-e=l===0?a7:B.e.ap(b.a.length/l*100)}else e=a7
+e=l===0?a8:B.e.ap(b.a.length/l*100)}else e=a8
 d=e>=80
-c=B.b.q("")
+c=B.b.q(a4==null?"":a4)
 a=A.A(a,t.z)
-a.m(0,"studentDocId",a8)
-a.m(0,"studentName",a9)
+a.m(0,"studentDocId",a9)
+a.m(0,"studentName",b0)
 a.m(0,"birthDate",a1)
 a.m(0,"certType",a2)
 l=$.cb()
@@ -16498,7 +16498,7 @@ this.a=c},
 boY:function boY(a){this.a=a},
 bzo(a,b){var s
 switch(a){case"INSTRUCTOR_REVIEW":return A.k("\uc9c0\uae08: \uac15\uc0ac \ud655\uc778 \ub300\uae30","Now: waiting for instructor")
-case"PENDING":return A.k("\uc9c0\uae08: \uc9c0\uc5ed\ubcf8\ubd80 \uacb0\uc7ac \ub300\uae30","Now: waiting for regional HQ")
+case"PENDING":return A.k("\uc9c0\uae08: \ud611\ud68c\ubcf8\ubd80 \uacb0\uc7ac \ub300\uae30","Now: waiting for regional HQ")
 case"APPROVED":s=""+b
 return A.k("\ubc1c\uae09 \uc644\ub8cc \xb7 C-Card "+s+"\uc7a5","Issued \xb7 "+s+" C-Card(s)")
 default:if(b>0){s=""+b
@@ -64771,7 +64771,7 @@ k=A.aw(k,B.n,B.f,B.h,0,g,g)
 j=A.c(A.k("\uc88c\uc6b0 \ud130\uce58 \ub610\ub294 \uc2a4\uc640\uc774\ud504\ub85c \ub118\uae40","Swipe or tap sides"),g,g,g,g,B.f1,g,g,g)
 if(r!=null){i=h.e
 i===$&&A.b()
-i=new A.MF(r,i,h.gaHO(),new A.aWE(h),g)}else i=A.d_(new A.ad(B.b2,A.c(A.k("\uc774 \uad50\uc7ac\ub294 \uc571 \uc548\uc5d0\uc11c\ub9cc \uc5f4\ub9bd\ub2c8\ub2e4.\n\ubcf8\ubd80\uc5d0\uc11c Cloudflare R2\ub85c PDF\ub97c \uc62c\ub9ac\uba74 \uc5ec\uae30\uc11c \ubcfc \uc218 \uc788\uc2b5\ub2c8\ub2e4.","This manual opens in-app only.\nHQ must upload the PDF to R2 first."),g,g,g,g,B.ajr,B.aB,g,g),g),g,g)
+i=new A.MF(r,i,h.gaHO(),new A.aWE(h),g)}else i=A.d_(new A.ad(B.b2,A.c(A.k("\uc774 \uad50\uc7ac\ub294 \uc571 \uc548\uc5d0\uc11c\ub9cc \uc5f4\ub9bd\ub2c8\ub2e4.\n\ud611\ud68c\ubcf8\ubd80\uc5d0\uc11c Cloudflare R2\ub85c PDF\ub97c \uc62c\ub9ac\uba74 \uc5ec\uae30\uc11c \ubcfc \uc218 \uc788\uc2b5\ub2c8\ub2e4.","This manual opens in-app only.\nHQ must upload the PDF to R2 first."),g,g,g,g,B.ajr,B.aB,g,g),g),g,g)
 o=A.a([new A.ad(new A.ae(f,8,8,6),n,g),new A.ad(B.eb,l,g),B.Y,new A.ad(B.eb,m,g),new A.ad(B.U1,k,g),new A.ad(B.pl,j,g),B.A,A.aA(i,1)],o)
 if(!p){f=A.dv(g,g,g,g,g,g,g,g,g,B.j,g,g,g,g,g,B.cO,g,g,g,g)
 n=h.d>=100
@@ -65306,7 +65306,7 @@ n=A.L(p,p.$ti.i("B.E"))
 s=s.ho(q,new A.arn())
 m=A.L(s,s.$ti.i("B.E"))
 s=t.p
-p=A.a([A.c(A.k("\uc790\uaca9\uc99d \ubc1c\uae09 \uc2ec\uc0ac \ud604\ud669","C-Card review status"),l,l,l,l,B.ao,l,l,l),B.Y,A.c(A.k("\uc9c0\uc2dd \ud3c9\uac00 \ud569\uaca9 \ud6c4 \uc99d\uba85\uc0ac\uc9c4\uc744 \ucca8\ubd80\ud574 \uc758\ub8b0\ud558\uba74, \ub2f4\ub2f9 \uac15\uc0ac\uac00 \ud655\uc778\ud558\uace0 \uc18c\uc18d \uc9c0\uc5ed\ubcf8\ubd80\ub85c \uc0ac\uc9c4\uacfc \ud568\uaed8 \uacb0\uc7ac\ub97c \uc62c\ub9bd\ub2c8\ub2e4. \ubc1c\uae09\uc774 \ub05d\ub098\uba74 C-Card \uc9c0\uac11\uc5d0 \ud45c\uc2dc\ub429\ub2c8\ub2e4.","After knowledge review, attach a photo ID. Your instructor confirms and sends it to regional HQ. When issued, it appears in C-Card wallet."),l,l,l,l,B.cl,l,l,l),B.a9],s)
+p=A.a([A.c(A.k("\uc790\uaca9\uc99d \ubc1c\uae09 \uc2ec\uc0ac \ud604\ud669","C-Card review status"),l,l,l,l,B.ao,l,l,l),B.Y,A.c(A.k("\uc9c0\uc2dd \ud3c9\uac00 \ud569\uaca9 \ud6c4 \uc99d\uba85\uc0ac\uc9c4\uc744 \ucca8\ubd80\ud574 \uc758\ub8b0\ud558\uba74, \ub2f4\ub2f9 \uac15\uc0ac\uac00 \ud655\uc778\ud558\uace0 \ud611\ud68c\ubcf8\ubd80\ub85c \uc0ac\uc9c4\uacfc \ud568\uaed8 \uacb0\uc7ac\ub97c \uc62c\ub9bd\ub2c8\ub2e4. \ubc1c\uae09\uc774 \ub05d\ub098\uba74 C-Card \uc9c0\uac11\uc5d0 \ud45c\uc2dc\ub429\ub2c8\ub2e4.","After knowledge review, attach a photo ID. Your instructor confirms and sends it to regional HQ. When issued, it appears in C-Card wallet."),l,l,l,l,B.cl,l,l,l),B.a9],s)
 if(m.length!==0){s=A.a([A.c(A.k("\uc758\ub8b0 \uac00\ub2a5 (\uc218\ub8cc)","Ready to request"),l,l,l,l,B.dm,l,l,l),B.A],s)
 B.c.F(s,new A.E(m,new A.aro(),A.I(m).i("E<1,h>")))
 s.push(B.a9)
@@ -65419,14 +65419,14 @@ if(s==null)s=A.k("\uc790\uaca9\uc99d","Certification")
 e=A.N(14)
 r=A.aZ(A.a1(115,B.j.p()>>>16&255,B.j.p()>>>8&255,B.j.p()&255),1)
 q=A.c(s,f,f,f,f,B.bN,f,f,f)
-p=A.c(A.k("\uc9c0\uc2dd \ud3c9\uac00 \ud569\uaca9 \xb7 \uc218\ub8cc \ud655\uc778\ub428. \uc99d\uba85\uc0ac\uc9c4\uc744 \ucca8\ubd80\ud558\uba74 \ub2f4\ub2f9 \uac15\uc0ac\uc5d0\uac8c \uc804\ub2ec\ub418\uace0, \uac15\uc0ac\uac00 \uc18c\uc18d \ubcf8\ubd80\ub85c \uc62c\ub9bd\ub2c8\ub2e4.","Knowledge review passed. Attach a photo ID \u2014 it goes to your instructor, then HQ."),f,f,f,f,B.kG,f,f,f)
+p=A.c(A.k("\uc9c0\uc2dd \ud3c9\uac00 \ud569\uaca9 \xb7 \uc218\ub8cc \ud655\uc778\ub428. \uc99d\uba85\uc0ac\uc9c4\uc744 \ucca8\ubd80\ud558\uba74 \ub2f4\ub2f9 \uac15\uc0ac\uc5d0\uac8c \uc804\ub2ec\ub418\uace0, \uac15\uc0ac\uac00 \ud611\ud68c\ubcf8\ubd80\ub85c \uc62c\ub9bd\ub2c8\ub2e4.","Knowledge review passed. Attach a photo ID \u2014 it goes to your instructor, then HQ."),f,f,f,f,B.kG,f,f,f)
 o=A.k("\uc5ec\uad8c \uc601\ubb38\uba85 (\uc120\ud0dd)","Passport name (optional)")
 o=A.b6(f,B.y,!1,f,!0,B.i,f,A.b9(),g.r,B.j,f,f,f,f,2,A.d4(f,f,f,f,f,f,f,f,!0,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,B.em,A.k("\uc608: KIM JONGCHEOL","e.g. KIM JONGCHEOL"),f,f,f,f,f,f,f,B.aO,o,!0,!0,!1,f,f,f,f,f,f,f,f,f,f,f,f,f,f),B.x,!0,f,!0,f,!1,f,B.G,f,f,f,f,f,f,f,f,1,f,f,!1,"\u2022",f,f,f,f,f,!1,f,f,!1,f,!0,f,B.H,f,f,f,f,f,f,f,f,f,f,f,B.O,!0,B.E,f,B.tb,f,f,f,f)
 n=g.e
 m=g.f
 l=A.N(10)
 k=t.p
-l=A.ai(f,A.Y(A.a([A.c(A.k("\ubc1c\uae09 \uc9c4\ud589","Issuance steps"),f,f,f,f,B.ais,f,f,f),B.Y,A.c(A.k("\uad50\uc721\uc0dd(\uc0ac\uc9c4\xb7\uc758\ub8b0) \u2192 \uac15\uc0ac(\ud655\uc778\xb7\uc0c1\uc815) \u2192 \uc9c0\uc5ed\ubcf8\ubd80(\uacb0\uc7ac\xb7C-Card)","Student (photo\xb7request) \u2192 Instructor (confirm) \u2192 Regional HQ (approve\xb7C-Card)"),f,f,f,f,B.eo,f,f,f)],k),B.t,B.f,B.h),B.k,f,f,new A.aq(B.q,f,f,l,f,f,B.u),f,f,f,f,B.de,f,f,1/0)
+l=A.ai(f,A.Y(A.a([A.c(A.k("\ubc1c\uae09 \uc9c4\ud589","Issuance steps"),f,f,f,f,B.ais,f,f,f),B.Y,A.c(A.k("\uad50\uc721\uc0dd(\uc0ac\uc9c4\xb7\uc758\ub8b0) \u2192 \uac15\uc0ac(\ud655\uc778\xb7\uc0c1\uc815) \u2192 \ud611\ud68c\ubcf8\ubd80(\uacb0\uc7ac\xb7C-Card)","Student (photo\xb7request) \u2192 Instructor (confirm) \u2192 Regional HQ (approve\xb7C-Card)"),f,f,f,f,B.eo,f,f,f)],k),B.t,B.f,B.h),B.k,f,f,new A.aq(B.q,f,f,l,f,f,B.u),f,f,f,f,B.de,f,f,1/0)
 j=A.bD(f,f,B.j,f,f,f,f,f,f,B.q,f,f,f,f,f,f,f,f,f,f)
 i=g.d
 h=i?f:new A.bm_(g,a)
@@ -65485,7 +65485,7 @@ A.blY.prototype={
 $0(){return this.a.d=!1},
 $S:0}
 A.blZ.prototype={
-$1(a){var s=null,r=A.c(A.k("\ubc1c\uae09 \uc758\ub8b0 \uc644\ub8cc","Request submitted"),s,s,s,s,B.bf,s,s,s),q=A.c(this.a?A.k("\uc774\ubbf8 \uc790\uaca9\uc99d \ubc1c\uae09 \uc758\ub8b0\uac00 \uc644\ub8cc\ub418\uc5b4 \uc2ec\uc0ac \uc911\uc785\ub2c8\ub2e4. \ub2f4\ub2f9 \uac15\uc0ac \ud655\uc778 \ud6c4 \ubcf8\ubd80 \uacb0\uc7ac\ub97c \uac70\uccd0 C-Card \uc9c0\uac11\uc5d0 \ud45c\uc2dc\ub429\ub2c8\ub2e4.","Request already in review. After instructor & HQ approval, it appears in C-Card wallet."):A.k("\uc790\uaca9\uc99d \ubc1c\uae09 \uc758\ub8b0\uac00 \uc644\ub8cc\ub418\uc5c8\uc2b5\ub2c8\ub2e4. \ub2f4\ub2f9 \uac15\uc0ac\uac00 \ud655\uc778\ud55c \ub4a4 \uc18c\uc18d \ubcf8\ubd80\ub85c \uc62c\ub9ac\uace0, \ubc1c\uae09\uc774 \ub05d\ub098\uba74 C-Card \uc9c0\uac11\uc5d0 \uc790\uaca9\uc99d\uc774 \ud45c\uc2dc\ub429\ub2c8\ub2e4.","Request submitted. Instructor confirms, HQ issues \u2014 then it shows in C-Card wallet."),s,s,s,s,B.cm,s,s,s)
+$1(a){var s=null,r=A.c(A.k("\ubc1c\uae09 \uc758\ub8b0 \uc644\ub8cc","Request submitted"),s,s,s,s,B.bf,s,s,s),q=A.c(this.a?A.k("\uc774\ubbf8 \uc790\uaca9\uc99d \ubc1c\uae09 \uc758\ub8b0\uac00 \uc644\ub8cc\ub418\uc5b4 \uc2ec\uc0ac \uc911\uc785\ub2c8\ub2e4. \ub2f4\ub2f9 \uac15\uc0ac \ud655\uc778 \ud6c4 \ud611\ud68c\ubcf8\ubd80 \uacb0\uc7ac\ub97c \uac70\uccd0 C-Card \uc9c0\uac11\uc5d0 \ud45c\uc2dc\ub429\ub2c8\ub2e4.","Request already in review. After instructor & HQ approval, it appears in C-Card wallet."):A.k("\uc790\uaca9\uc99d \ubc1c\uae09 \uc758\ub8b0\uac00 \uc644\ub8cc\ub418\uc5c8\uc2b5\ub2c8\ub2e4. \ub2f4\ub2f9 \uac15\uc0ac\uac00 \ud655\uc778\ud55c \ub4a4 \ud611\ud68c\ubcf8\ubd80\ub85c \uc62c\ub9ac\uace0, \ubc1c\uae09\uc774 \ub05d\ub098\uba74 C-Card \uc9c0\uac11\uc5d0 \uc790\uaca9\uc99d\uc774 \ud45c\uc2dc\ub429\ub2c8\ub2e4.","Request submitted. Instructor confirms, HQ issues \u2014 then it shows in C-Card wallet."),s,s,s,s,B.cm,s,s,s)
 return A.dz(A.a([A.bz(A.c(A.k("\ud655\uc778","OK"),s,s,s,s,B.cG,s,s,s),s,s,new A.blW(a),s,s)],t.p),B.p,q,s,r)},
 $S:13}
 A.blW.prototype={
@@ -65504,8 +65504,8 @@ o=a3==="INSTRUCTOR_REVIEW"
 n=!r||a3==="HQ_REVIEW"
 r=a1.h(0,"certType")
 m=J.i(r==null?A.k("\uc790\uaca9\uc99d","Certification"):r)
-if(p)l=A.k("\ud604\uc7ac: \ubcf8\ubd80 \uc2b9\uc778 \uc644\ub8cc \xb7 C-Card \uc9c0\uac11\uc5d0 \ud45c\uc2dc\ub429\ub2c8\ub2e4","Now: HQ approved \xb7 in C-Card wallet")
-else if(n)l=A.k("\ud604\uc7ac: \ubcf8\ubd80 \uacb0\uc7ac \ub300\uae30 (\uac15\uc0ac \ud655\uc778 \uc644\ub8cc)","Now: Awaiting HQ (instructor done)")
+if(p)l=A.k("\ud604\uc7ac: \ud611\ud68c\ubcf8\ubd80 \uc2b9\uc778 \uc644\ub8cc \xb7 C-Card \uc9c0\uac11\uc5d0 \ud45c\uc2dc\ub429\ub2c8\ub2e4","Now: HQ approved \xb7 in C-Card wallet")
+else if(n)l=A.k("\ud604\uc7ac: \ud611\ud68c\ubcf8\ubd80 \uacb0\uc7ac \ub300\uae30 (\uac15\uc0ac \ud655\uc778 \uc644\ub8cc)","Now: Awaiting HQ (instructor done)")
 else l=o?A.k("\ud604\uc7ac: \ub2f4\ub2f9 \uac15\uc0ac \ud655\uc778 \ub300\uae30","Now: Awaiting instructor"):A.k("\ud604\uc7ac: \ubc1c\uae09 \uc758\ub8b0 \uc811\uc218\ub428","Now: Request received")
 r=A.N(16)
 k=A.aZ(A.a1(B.e.ap(127.5),B.j.p()>>>16&255,B.j.p()>>>8&255,B.j.p()&255),1.2)
@@ -65517,9 +65517,9 @@ f=A.N(10)
 e=A.bGL(10,n,p,o,q,26,!0)
 d=s?A.k("\uad50\uc721\uc0dd: \uc99d\uba85\uc0ac\uc9c4 \ucca8\ubd80 \uc644\ub8cc","Student: photo attached"):A.k("\uad50\uc721\uc0dd: \uc99d\uba85\uc0ac\uc9c4 \ucca8\ubd80 \ud544\uc694","Student: photo required")
 c=A.k("\uad50\uc721\uc0dd: \ubc1c\uae09 \uc758\ub8b0 \uc811\uc218","Student: request submitted")
-b=q?A.k("\uac15\uc0ac: \ud655\uc778\xb7\uc9c0\uc5ed\ubcf8\ubd80 \uc0c1\uc815 \uc644\ub8cc","Instructor: confirmed & submitted to HQ"):A.k("\uac15\uc0ac: \ud655\uc778 \ub300\uae30","Instructor: awaiting review")
-if(p)a=A.k("\uc9c0\uc5ed\ubcf8\ubd80: \uc2b9\uc778 \xb7 C-Card \uc644\ub8cc","Regional HQ: approved \xb7 C-Card ready")
-else a=n?A.k("\uc9c0\uc5ed\ubcf8\ubd80: \uacb0\uc7ac \ub300\uae30","Regional HQ: awaiting approval"):A.k("\uc9c0\uc5ed\ubcf8\ubd80: \uc2b9\uc778 \ub300\uae30","Regional HQ: pending")
+b=q?A.k("\uac15\uc0ac: \ud655\uc778\xb7\ud611\ud68c\ubcf8\ubd80 \uc0c1\uc815 \uc644\ub8cc","Instructor: confirmed & submitted to HQ"):A.k("\uac15\uc0ac: \ud655\uc778 \ub300\uae30","Instructor: awaiting review")
+if(p)a=A.k("\ud611\ud68c\ubcf8\ubd80: \uc2b9\uc778 \xb7 C-Card \uc644\ub8cc","Regional HQ: approved \xb7 C-Card ready")
+else a=n?A.k("\ud611\ud68c\ubcf8\ubd80: \uacb0\uc7ac \ub300\uae30","Regional HQ: awaiting approval"):A.k("\ud611\ud68c\ubcf8\ubd80: \uc2b9\uc778 \ub300\uae30","Regional HQ: pending")
 return A.ai(a0,A.Y(A.a([i,B.Y,h,B.a4,g,B.P,new A.ahQ(a1,a0),B.w,A.ai(a0,A.Y(A.a([e,B.w,B.pb,B.P,new A.Cg(s,a2,d,a0),B.A,new A.Cg(!0,!1,c,a0),B.A,new A.Cg(q,o,b,a0),B.A,new A.Cg(p,n,a,a0)],j),B.n,B.f,B.h),B.k,a0,a0,new A.aq(B.q,a0,a0,f,a0,a0,B.u),a0,a0,a0,a0,B.TD,a0,a0,a0)],j),B.t,B.f,B.h),B.k,a0,a0,new A.aq(B.p,a0,k,r,a0,a0,B.u),a0,a0,a0,B.lO,B.H,a0,a0,a0)},
 aK(a){return this.c.$0()}}
 A.Cg.prototype={
@@ -65538,8 +65538,8 @@ s=J.i(q==null?"":q)
 q=A.N(6)
 p=o.length===0
 q=A.e1(q,A.ai(r,p?B.YD:A.hx(o,B.Q,new A.bna(),B.b7,B.b1,!1,r,r,B.c_,r),B.k,B.q,r,r,r,68,r,r,r,r,r,52),B.an)
-if(p)p=A.k("\uc99d\uba85\uc0ac\uc9c4 \ubbf8\ucca8\ubd80. \uac15\uc0ac\uac00 \ubcf8\ubd80\ub85c \uc62c\ub9ac\ub824\uba74 \uc0ac\uc9c4\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.","No photo ID. Instructor needs it to submit to HQ.")
-else p=s==="PENDING"||s==="APPROVED"?A.k("\uc99d\uba85\uc0ac\uc9c4\uc774 \ub2f4\ub2f9 \uac15\uc0ac\xb7\uc18c\uc18d \ubcf8\ubd80\uc5d0 \uc804\ub2ec\ub418\uc5c8\uc2b5\ub2c8\ub2e4.","Photo ID sent to instructor & HQ."):A.k("\uc99d\uba85\uc0ac\uc9c4\uc774 \ub2f4\ub2f9 \uac15\uc0ac\uc5d0\uac8c \uc804\ub2ec\ub418\uc5c8\uc2b5\ub2c8\ub2e4. \uac15\uc0ac \ud655\uc778 \ud6c4 \uc18c\uc18d \ubcf8\ubd80\ub85c \uc62c\ub77c\uac11\ub2c8\ub2e4.","Photo ID with instructor \u2014 then on to HQ.")
+if(p)p=A.k("\uc99d\uba85\uc0ac\uc9c4 \ubbf8\ucca8\ubd80. \uac15\uc0ac\uac00 \ud611\ud68c\ubcf8\ubd80\ub85c \uc62c\ub9ac\ub824\uba74 \uc0ac\uc9c4\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.","No photo ID. Instructor needs it to submit to HQ.")
+else p=s==="PENDING"||s==="APPROVED"?A.k("\uc99d\uba85\uc0ac\uc9c4\uc774 \ub2f4\ub2f9 \uac15\uc0ac\xb7\ud611\ud68c\ubcf8\ubd80\uc5d0 \uc804\ub2ec\ub418\uc5c8\uc2b5\ub2c8\ub2e4.","Photo ID sent to instructor & HQ."):A.k("\uc99d\uba85\uc0ac\uc9c4\uc774 \ub2f4\ub2f9 \uac15\uc0ac\uc5d0\uac8c \uc804\ub2ec\ub418\uc5c8\uc2b5\ub2c8\ub2e4. \uac15\uc0ac \ud655\uc778 \ud6c4 \ud611\ud68c\ubcf8\ubd80\ub85c \uc62c\ub77c\uac11\ub2c8\ub2e4.","Photo ID with instructor \u2014 then on to HQ.")
 return A.aw(A.a([q,B.bY,A.aA(A.c(p,r,r,r,r,B.eo,r,r,r),1)],t.p),B.t,B.f,B.h,0,r,r)},
 aK(a){return this.c.$0()}}
 A.bna.prototype={
@@ -65558,7 +65558,7 @@ $3(a,b,c){return B.xX},
 $S:52}
 A.Kr.prototype={
 aFM(){window.location.href="https://jckim321.github.io/apdi/"},
-I(a){var s=this,r=null,q=A.a_Y(A.vd("assets/apdi_logo_circle.png",B.Q,new A.arz(),B.b1,72,72)),p=A.c(A.k("APDI \uc790\uaca9 \uc9c4\uc704 \ud655\uc778","APDI Certificate Verification"),r,r,r,r,B.agS,B.aB,r,r),o=A.c(A.k("\uc774 \ub514\uc9c0\ud138 C-Card\ub294 APDI \ubcf8\ubd80 \uc804\uc0b0\ub9dd\uc5d0 \ub4f1\ub85d\ub41c \uacf5\uc2dd \uc790\uaca9\uc785\ub2c8\ub2e4.","This digital C-Card is officially registered on the APDI network."),r,r,r,r,B.Kj,B.aB,r,r),n=A.N(14),m=A.aZ(A.a1(89,B.j.p()>>>16&255,B.j.p()>>>8&255,B.j.p()&255),1),l=s.a78(A.k("\uc131\uba85","Name"),s.c),k=A.k("\uc790\uaca9","Certification"),j=s.d,i=t.p
+I(a){var s=this,r=null,q=A.a_Y(A.vd("assets/apdi_logo_circle.png",B.Q,new A.arz(),B.b1,72,72)),p=A.c(A.k("APDI \uc790\uaca9 \uc9c4\uc704 \ud655\uc778","APDI Certificate Verification"),r,r,r,r,B.agS,B.aB,r,r),o=A.c(A.k("\uc774 \ub514\uc9c0\ud138 C-Card\ub294 APDI \ud611\ud68c\ubcf8\ubd80 \uc804\uc0b0\ub9dd\uc5d0 \ub4f1\ub85d\ub41c \uacf5\uc2dd \uc790\uaca9\uc785\ub2c8\ub2e4.","This digital C-Card is officially registered on the APDI network."),r,r,r,r,B.Kj,B.aB,r,r),n=A.N(14),m=A.aZ(A.a1(89,B.j.p()>>>16&255,B.j.p()>>>8&255,B.j.p()&255),1),l=s.a78(A.k("\uc131\uba85","Name"),s.c),k=A.k("\uc790\uaca9","Certification"),j=s.d,i=t.p
 n=A.ai(r,A.Y(A.a([l,B.P,s.a79(k,j.length===0?"\u2014":j,!0),B.P,s.a78(A.k("\uc790\uaca9\ubc88\ud638","License No."),s.e),B.P,B.amo],i),B.t,B.f,B.h),B.k,r,r,new A.aq(B.q,r,m,n,r,r,B.u),r,r,r,r,B.cz,r,r,1/0)
 m=A.a1(31,B.j.p()>>>16&255,B.j.p()>>>8&255,B.j.p()&255)
 j=A.N(12)
@@ -65634,7 +65634,7 @@ A.asE.prototype={
 $1(a){return new A.kg(new A.asD(this.a,this.b,this.c),null)},
 $S:54}
 A.asD.prototype={
-$2(a,b){var s,r,q,p=null,o=A.ca(a,p,t.w).w,n=A.N(16),m=A.c(A.k("\ub2f4\ub2f9 \uac15\uc0ac","Assigned instructor"),p,p,p,p,B.nq,p,p,p),l=A.c(A.k("\uac15\uc758\ub97c \ub9e1\uc740 \uac15\uc0ac\uc758 \ubc88\ud638\ub97c \uc785\ub825\ud569\ub2c8\ub2e4. \uc628\ub77c\uc778 \ubc1c\uae09\uc740 \uc774 \uac15\uc0ac\uc758 \uc18c\uc18d \uc9c0\uc5ed\ubcf8\ubd80\ub97c \ub530\ub77c \ubc1c\ud589\ub429\ub2c8\ub2e4.","Enter your instructor number. Online issuance follows that instructor\u2019s regional HQ."),p,p,p,p,B.ns,p,p,p),k=this.a,j=k.c,i=A.k("\ub2f4\ub2f9 \uac15\uc0ac \ubc88\ud638 (\uc608: 101 / FD101)","Instructor No. (e.g. 101 / FD101)"),h=this.c
+$2(a,b){var s,r,q,p=null,o=A.ca(a,p,t.w).w,n=A.N(16),m=A.c(A.k("\ub2f4\ub2f9 \uac15\uc0ac","Assigned instructor"),p,p,p,p,B.nq,p,p,p),l=A.c(A.k("\uac15\uc758\ub97c \ub9e1\uc740 \uac15\uc0ac\uc758 \ubc88\ud638\ub97c \uc785\ub825\ud569\ub2c8\ub2e4. \uc628\ub77c\uc778 \ubc1c\uae09\uc740 \uc774 \uac15\uc0ac\uc758 \ud611\ud68c\ubcf8\ubd80\ub97c \ub530\ub77c \ubc1c\ud589\ub429\ub2c8\ub2e4.","Enter your instructor number. Online issuance follows that instructor\u2019s regional HQ."),p,p,p,p,B.ns,p,p,p),k=this.a,j=k.c,i=A.k("\ub2f4\ub2f9 \uac15\uc0ac \ubc88\ud638 (\uc608: 101 / FD101)","Instructor No. (e.g. 101 / FD101)"),h=this.c
 j=A.b6(p,B.y,!0,p,!0,B.i,p,A.b9(),this.b,p,p,p,p,p,2,A.d4(p,new A.cO(4,A.N(10),B.z),p,B.b6,p,p,p,p,!0,p,p,p,p,p,p,B.q,!0,p,p,p,p,p,p,p,p,p,p,p,p,p,B.hv,"101",p,p,p,p,p,p,p,B.bx,i,!0,!0,!1,p,p,p,p,p,p,p,p,p,p,p,p,p,p),B.x,!0,p,!0,!j,!1,p,B.G,p,p,p,p,p,p,p,p,1,p,p,!1,"\u2022",p,new A.asy(k,b),new A.asz(h,b),p,p,!1,p,p,!1,p,!0,p,B.H,p,p,p,p,p,p,p,p,p,p,p,B.aF,!0,B.E,p,B.J,p,p,p,p)
 i=A.c(A.k("\ub2f4\ub2f9 \uac15\uc0ac\ub97c \ubaa8\ub974\uac70\ub098 \ucc98\uc74c \uc785\ubb38\ud558\uc2dc\ub294 \ubd84\uc740 101\ub85c \uc9c0\uc815\ud574 \uc8fc\uc138\uc694.","If you do not know your instructor yet, use 101."),p,p,p,p,B.aiw,p,p,p)
 s=A.dv(p,p,p,p,p,p,p,p,p,B.j,p,p,B.pn,p,new A.bN(A.N(10),B.z),B.cO,p,p,p,p)
@@ -65896,7 +65896,7 @@ h=A.bz(A.c(A.k("HQ \ubc30\uc5f4\uc21c","HQ order"),d,d,d,d,B.f2,d,d,d),d,d,new A
 g=A.jG(d,d,d,d,d,d,d,d,d,!c.x?B.j:B.ad,d,d,d,B.dN,d,d,d,d,d,d,B.cX)
 g=A.aw(A.a([i,B.cW,h,A.bz(A.c(A.k("\uac00\ub098\ub2e4\uc21c","A\u2013Z"),d,d,d,d,B.f2,d,d,d),d,d,new A.b2x(c),d,g)],j),B.n,B.f,B.h,0,d,d)
 i=r.length
-if(i===0)i=A.d_(A.c(s.length===0?A.k("\ubcf8\ubd80\uac00 C-Card \ud15c\ud50c\ub9bf\uc5d0 \ub2e4\uc774\ubc84\xb7\uac15\uc0ac \uacfc\uc815\uc744 \ub4f1\ub85d\ud558\uba74 \uc5ec\uae30\uc5d0 \ub098\ud0c0\ub0a9\ub2c8\ub2e4.","Courses appear when HQ registers C-Card templates."):A.k("\uac80\uc0c9\xb7\ud544\ud130 \uc870\uac74\uc5d0 \ub9de\ub294 \uacfc\uc815\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.","No courses match this filter."),d,d,d,d,B.tr,B.aB,d,d),d,d)
+if(i===0)i=A.d_(A.c(s.length===0?A.k("\ud611\ud68c\ubcf8\ubd80\uac00 C-Card \ud15c\ud50c\ub9bf\uc5d0 \ub2e4\uc774\ubc84\xb7\uac15\uc0ac \uacfc\uc815\uc744 \ub4f1\ub85d\ud558\uba74 \uc5ec\uae30\uc5d0 \ub098\ud0c0\ub0a9\ub2c8\ub2e4.","Courses appear when HQ registers C-Card templates."):A.k("\uac80\uc0c9\xb7\ud544\ud130 \uc870\uac74\uc5d0 \ub9de\ub294 \uacfc\uc815\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.","No courses match this filter."),d,d,d,d,B.tr,B.aB,d,d),d,d)
 else i=A.bH9(new A.b2n(c,r,p),i,d,new A.b2o())
 i=A.aA(i,1)
 h=A.bD(d,d,B.j,d,d,d,d,d,d,B.q,d,d,B.bi,d,new A.bN(A.N(12),B.z),d,d,d,d,d)
@@ -66265,8 +66265,8 @@ if(e)b="\uad50\uc721\uc0dd \ubc1c\uae09 \uc758\ub8b0 \xb7 \uac15\uc0ac \ud655\uc
 else b=a3.length===0?"\ubc1c\uae09 \uc758\ub8b0 \uc804":"\ubc1c\uae09 \uc758\ub8b0\uac00 \uc811\uc218\ub418\uc5c8\uc2b5\ub2c8\ub2e4."
 a0=a3==="APPROVED"
 a4=a3==="PENDING"
-if(a0)a5="\ubcf8\ubd80 \ubc1c\uae09 \uc644\ub8cc \xb7 C-Card \uc9c0\uac11"
-else a5=a4?"\ubcf8\ubd80 \uacb0\uc7ac \ub300\uae30":"\ubc1c\uae09 \uc804"
+if(a0)a5="\ud611\ud68c\ubcf8\ubd80 \ubc1c\uae09 \uc644\ub8cc \xb7 C-Card \uc9c0\uac11"
+else a5=a4?"\ud611\ud68c\ubcf8\ubd80 \uacb0\uc7ac \ub300\uae30":"\ubc1c\uae09 \uc804"
 a6=A.a([new A.q9([!1,"\uacfc\uc815 \uc2e0\uccad\uc774 \uc811\uc218\ub418\uc5c8\uc2b5\ub2c8\ub2e4.","\uc2e0\uccad",!0]),new A.q9([!l,"\uc218\ub0a9 \ud655\uc778 \ud6c4 \uacfc\uc815\uc774 \uc2b9\uc778\ub418\uc5c8\uc2b5\ub2c8\ub2e4.","\uc2b9\uc778",!0]),new A.q9([r,p,"\uad50\uc7ac",l]),new A.q9([g,"\uad50\uc721\uc0dd\uc774 \ub0b4\uc11c\uc7ac\uc5d0\uc11c \ud574\ub2f9 \ub9e4\ub274\uc5bc\uc744 \ud559\uc2b5\ud569\ub2c8\ub2e4.","\ud559\uc2b5",j]),new A.q9([!1,f,"\ud3c9\uac00",s]),new A.q9([e,b,"\uc758\ub8b0",c]),new A.q9([a4,a5,"\ubc1c\uae09",a0])],t.Xk)
 a0=A.N(10)
 a5=A.aZ(B.aX,1)
@@ -67855,52 +67855,55 @@ break
 case 6:case 1:return A.p(q,r)
 case 2:return A.o(o.at(-1),r)}})
 return A.q($async$zP,r)},
-Bc(){var s=0,r=A.r(t.H),q,p=this,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2
-var $async$Bc=A.n(function(a3,a4){if(a3===1)return A.o(a4,r)
-for(;;)switch(s){case 0:a0=t.s
-a1=A.a([],a0)
-a2=A.a([],a0)
-for(a0=p.at,o=p.f,n=0;m=p.e,n<m.length;++n){l=m[n]
+Bc(){var s=0,r=A.r(t.H),q,p=this,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5
+var $async$Bc=A.n(function(a6,a7){if(a6===1)return A.o(a7,r)
+for(;;)switch(s){case 0:a3=t.s
+a4=A.a([],a3)
+a5=A.a([],a3)
+for(a3=p.at,o=p.f,n=0;m=p.e,n<m.length;++n){l=m[n]
 m=l.a
-if(o.h(0,n)===l.d){a1.push(m)
-a0.B(0,m)}else{a2.push(m)
-a0.M(0,m)}}o=t.N
+if(o.h(0,n)===l.d){a4.push(m)
+a3.B(0,m)}else{a5.push(m)
+a3.M(0,m)}}o=t.N
 m=J.e8(p.d,new A.b6T(),o)
 k=A.L(m,m.$ti.i("ar.E"))
 j=k.length
 j=j!==0?j:p.e.length
-i=j===0?0:B.e.ap(new A.a4(a0,new A.b6U(k),A.x(a0).i("a4<1>")).gE(0)/j*100)
+i=j===0?0:B.e.ap(new A.a4(a3,new A.b6U(k),A.x(a3).i("a4<1>")).gE(0)/j*100)
 h=p.e.length
-g=a1.length
+g=a4.length
 f=h===0?0:B.e.ap(g/h*100)
 e=p.x&&h>0
 s=$.bJ?3:4
 break
-case 3:a0=$.f_
+case 3:a3=$.f_
 m=$.ce
+d=$.d0
+c=p.gti()
+b=p.a
 s=5
-return A.e(A.a_B($.d0,p.gti(),p.a.e===B.bV,a1,a2,k,i,a0,m),$async$Bc)
+return A.e(A.a_B(d,c,b.e===B.bV,b.r,a4,a5,k,i,a3,m),$async$Bc)
 case 5:m=$.f_
 s=6
 return A.e(A.qC(p.gti(),null,m),$async$Bc)
-case 6:d=a4
-if(p.a.e===B.bV){a0=A.dq(d==null?null:J.F(d,"finalScore"))
-a0=a0==null?null:B.e.bj(a0)
-c=a0==null?i:a0}else{a0=A.dq(d==null?null:J.F(d,"practiceScore"))
-a0=a0==null?null:B.e.bj(a0)
-c=a0==null?i:a0}b=p.a.e===B.bV?"finalMissedIds":"practiceMissedIds"
-a0=d==null?null:J.F(d,b)
-t.kc.a(a0)
-if(a0==null)a=null
-else{a0=J.e8(a0,new A.b6V(),o)
-a0=A.L(a0,a0.$ti.i("ar.E"))
-a=a0}if(a==null)a=a2
+case 6:a=a7
+if(p.a.e===B.bV){a3=A.dq(a==null?null:J.F(a,"finalScore"))
+a3=a3==null?null:B.e.bj(a3)
+a0=a3==null?i:a3}else{a3=A.dq(a==null?null:J.F(a,"practiceScore"))
+a3=a3==null?null:B.e.bj(a3)
+a0=a3==null?i:a3}a1=p.a.e===B.bV?"finalMissedIds":"practiceMissedIds"
+a3=a==null?null:J.F(a,a1)
+t.kc.a(a3)
+if(a3==null)a2=null
+else{a3=J.e8(a3,new A.b6V(),o)
+a3=A.L(a3,a3.$ti.i("ar.E"))
+a2=a3}if(a2==null)a2=a5
 if(p.c==null){s=1
-break}p.t(new A.b6W(p,c,d,a,e,f,h,g))
+break}p.t(new A.b6W(p,a0,a,a2,e,f,h,g))
 p.zP()
 s=1
 break
-case 4:p.t(new A.b6X(p,i,a2,e,f,h,g))
+case 4:p.t(new A.b6X(p,i,a5,e,f,h,g))
 case 1:return A.p(q,r)}})
 return A.q($async$Bc,r)},
 HA(){return this.aIy()},
@@ -68000,7 +68003,7 @@ n.a.toString
 B.c.F(k,A.a([q,B.Y,A.c(A.k("\uc6d0\ubcf8 \ub300\ube44 \ucda9\uc871\ub960: "+o+"%  \xb7  \uae30\uc900 80%","Vs full paper: "+o+l),m,m,m,m,A.bh(m,m,a,m,m,m,m,m,m,m,m,16,m,m,B.D,m,m,!0,m,m,m,m,m,m,m,m),m,m,m),B.A,A.c(A.k("\uc704\ub294 \uc774\ubc88 \ubcf5\uc2b5(\ud2c0\ub9b0 \ubb38\ud56d\ub9cc) \uacb0\uacfc\uc785\ub2c8\ub2e4.\n\ud569\uaca9\xb7\ucda9\uc871 \ud310\uc815\uc740 \uc544\ub798 \u300c\uc6d0\ubcf8 \ub300\ube44 \ucda9\uc871\ub960\u300d\ub9cc \uc0ac\uc6a9\ud569\ub2c8\ub2e4.","Above is this missed-item review only.\nPass/meet uses \u201cVs full paper\u201d below."),m,m,m,m,B.eo,B.aB,m,m)],j))}else{q=""+n.y
 n.a.toString
 k.push(A.c(A.k("\uc6d0\ubcf8 \ub300\ube44 \ucda9\uc871\ub960: "+q+"%  \xb7  \uae30\uc900 80%","Vs full paper: "+q+l),m,m,m,m,A.bh(m,m,a,m,m,m,m,m,m,m,m,16,m,m,B.D,m,m,!0,m,m,m,m,m,m,m,m),m,m,m))}k.push(B.a9)
-if(i)q=h||n.a.e===B.bV?A.k("\uc9c0\uc2dd \ud3c9\uac00\ub97c \ucda9\uc871\ud588\uc2b5\ub2c8\ub2e4. \uc544\ub798 \ubc84\ud2bc\uc5d0\uc11c \uc99d\uba85\uc0ac\uc9c4\uc744 \ucca8\ubd80\ud574 \ubc1c\uae09\uc744 \uc758\ub8b0\ud558\uba74 \ub2f4\ub2f9 \uac15\uc0ac\uc5d0\uac8c \uc804\ub2ec\ub418\uace0, \uac15\uc0ac\uac00 \uc18c\uc18d \ubcf8\ubd80\ub85c \uc62c\ub9bd\ub2c8\ub2e4.","Knowledge met. Attach a photo ID below to request your C-Card \u2014 your instructor then sends it to HQ."):A.k("\ucd5c\uc885 \uc9c0\uc2dd \ud3c9\uac00\uc5d0 \uc751\uc2dc\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.","You can take the final knowledge review.")
+if(i)q=h||n.a.e===B.bV?A.k("\uc9c0\uc2dd \ud3c9\uac00\ub97c \ucda9\uc871\ud588\uc2b5\ub2c8\ub2e4. \uc544\ub798 \ubc84\ud2bc\uc5d0\uc11c \uc99d\uba85\uc0ac\uc9c4\uc744 \ucca8\ubd80\ud574 \ubc1c\uae09\uc744 \uc758\ub8b0\ud558\uba74 \ub2f4\ub2f9 \uac15\uc0ac\uc5d0\uac8c \uc804\ub2ec\ub418\uace0, \uac15\uc0ac\uac00 \ud611\ud68c\ubcf8\ubd80\ub85c \uc62c\ub9bd\ub2c8\ub2e4.","Knowledge met. Attach a photo ID below to request your C-Card \u2014 your instructor then sends it to HQ."):A.k("\ucd5c\uc885 \uc9c0\uc2dd \ud3c9\uac00\uc5d0 \uc751\uc2dc\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.","You can take the final knowledge review.")
 else q=n.ch!=null?A.k("\ud2c0\ub9b0 \ubb38\ud56d\ub9cc \ub2e4\uc2dc \uc775\ud788\uba74 \ub429\ub2c8\ub2e4. \u300c\uc774\ubc88 \ubcf5\uc2b5 \uc810\uc218\u300d\uc640 \u300c\uc6d0\ubcf8 \ub300\ube44 \ucda9\uc871\ub960\u300d\uc744 \ud63c\ub3d9\ud558\uc9c0 \ub9c8\uc138\uc694.","Retry missed items only. Don\u2019t mix \u201cThis review\u201d with \u201cVs full paper.\u201d"):A.k("\ud2c0\ub9b0 \ubb38\ud56d\ub9cc \ub2e4\uc2dc \ud480\uc5b4 \ud574\ub2f9 \ub0b4\uc6a9\uc744 \uc775\ud788\uba74 \ub429\ub2c8\ub2e4. \ucda9\uc871 \ud310\uc815\uc740 \ucc98\uc74c \uc2dc\ud5d8\uc9c0 \uc804\uccb4 \ub300\ube44\ub85c \uacc4\uc0b0\ud569\ub2c8\ub2e4.","Retry missed items to fill gaps. Meet mark is vs the full original paper.")
 k.push(A.c(q,m,m,m,m,B.agr,B.aB,m,m))
 if(s.length!==0){q=A.a([B.fp],j)
@@ -68135,7 +68138,7 @@ q=q.c
 q=A.h5(s,!0,B.p,s,s,s,B.cS,s,s,s,A.c(p===B.bV?A.k(q+" \ucd5c\uc885 \uc9c0\uc2dd \ud3c9\uac00",q+" \xb7 Final knowledge review"):A.k(q+" \uc9c0\uc2dd \ud3c9\uac00",q+" \xb7 Knowledge review"),s,s,s,s,B.ao,s,s,s),s)
 if(!r.w)r=B.c5
 else if(J.fJ(r.d)){r=r.ax
-r=A.d_(new A.ad(B.pq,A.c(r!=null?A.k(r,"Could not load questions."):A.k("\uc774 \ud544\uc218 \uad50\uc7ac\uc758 \uc9c0\uc2dd \ud3c9\uac00 \ubb38\ud56d\uc774 \uc544\uc9c1 \ub4f1\ub85d\ub418\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4.\n\ubcf8\ubd80\uc5d0\uc11c CSV\ub85c \ubb38\ud56d\uc744 \uc62c\ub9ac\uba74 \uc751\uc2dc\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.","No knowledge-review questions yet for this required manual.\nHQ will upload a CSV before you can take it."),s,s,s,s,B.agC,B.aB,s,s),s),s,s)}else r=r.r?r.arB(B.j):r.ary(B.j)
+r=A.d_(new A.ad(B.pq,A.c(r!=null?A.k(r,"Could not load questions."):A.k("\uc774 \ud544\uc218 \uad50\uc7ac\uc758 \uc9c0\uc2dd \ud3c9\uac00 \ubb38\ud56d\uc774 \uc544\uc9c1 \ub4f1\ub85d\ub418\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4.\n\ud611\ud68c\ubcf8\ubd80\uc5d0\uc11c CSV\ub85c \ubb38\ud56d\uc744 \uc62c\ub9ac\uba74 \uc751\uc2dc\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.","No knowledge-review questions yet for this required manual.\nHQ will upload a CSV before you can take it."),s,s,s,s,B.agC,B.aB,s,s),s),s,s)}else r=r.r?r.arB(B.j):r.ary(B.j)
 return A.f8(q,B.q,r,s,s)},
 $S:89}
 A.b6w.prototype={
@@ -80680,7 +80683,7 @@ return A.aA(A.ai(s,s,B.k,r,s,s,s,2,s,new A.ae(0,0,0,this.x+6),s,s,s,s),1)},
 I(a){var s,r=this,q=r.Rn(A.k("\uad50\uc721\uc0dd","Student"),!1,r.c),p=r.d,o=r.a1m(p||r.f)
 p=r.Rn(A.k("\uac15\uc0ac","Instructor"),r.f,p)
 s=r.e
-return A.aw(A.a([q,o,p,r.a1m(s||r.r),r.Rn(A.k("\uc9c0\uc5ed\ubcf8\ubd80","Regional HQ"),r.r,s)],t.p),B.t,B.f,B.h,0,null,null)}}
+return A.aw(A.a([q,o,p,r.a1m(s||r.r),r.Rn(A.k("\ud611\ud68c\ubcf8\ubd80","Regional HQ"),r.r,s)],t.p),B.t,B.f,B.h,0,null,null)}}
 A.EQ.prototype={
 aDV(a){var s,r,q,p=null,o=a.h(0,"studentName")
 if(B.b.q(J.i(o==null?"":o))!==B.b.q($.ce))return!1
@@ -80894,13 +80897,13 @@ a=A.k("6. \uc790\uaca9\uc99d \ubc1c\uae09 \uc758\ub8b0","6. C-Card request")
 if(b7)a0=A.k("\ubc1c\uae09 \uc758\ub8b0\uac00 \uc644\ub8cc\ub418\uc5c8\uc2b5\ub2c8\ub2e4.","Request submitted.")
 else a0=b2?A.k("\uc99d\uba85\uc0ac\uc9c4\uc744 \ucca8\ubd80\ud574 \uc758\ub8b0\ud558\uc138\uc694.","Attach photo ID and request."):A.k("\ucd5c\uc885 \ud569\uaca9 \ud6c4 \uc758\ub8b0\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.","Available after final pass.")
 b6=b2&&b6
-a1=A.k("7. \uac15\uc0ac \ud655\uc778 \xb7 \ubcf8\ubd80 \uc0c1\uc815","7. Instructor \xb7 HQ submit")
-if(s)a2=A.k("\uac15\uc0ac\uac00 \ud655\uc778\ud558\uace0 \ubcf8\ubd80\ub85c \uc62c\ub838\uc2b5\ub2c8\ub2e4.","Instructor confirmed and sent to HQ.")
+a1=A.k("7. \uac15\uc0ac \ud655\uc778 \xb7 \ud611\ud68c\ubcf8\ubd80 \uc0c1\uc815","7. Instructor \xb7 HQ submit")
+if(s)a2=A.k("\uac15\uc0ac\uac00 \ud655\uc778\ud558\uace0 \ud611\ud68c\ubcf8\ubd80\ub85c \uc62c\ub838\uc2b5\ub2c8\ub2e4.","Instructor confirmed and sent to HQ.")
 else a2=b7?A.k("\ub2f4\ub2f9 \uac15\uc0ac \ud655\uc778\uc744 \uae30\ub2e4\ub9ac\ub294 \uc911\uc785\ub2c8\ub2e4.","Waiting for instructor check."):A.k("\uc758\ub8b0 \ud6c4 \uac15\uc0ac\uac00 \ud655\uc778\ud569\ub2c8\ub2e4.","Instructor checks after request.")
 a3=b7&&!s
-a4=A.k("8. \ubcf8\ubd80 \ubc1c\uae09 \xb7 C-Card \uc9c0\uac11","8. HQ issue \xb7 C-Card wallet")
+a4=A.k("8. \ud611\ud68c\ubcf8\ubd80 \ubc1c\uae09 \xb7 C-Card \uc9c0\uac11","8. HQ issue \xb7 C-Card wallet")
 if(b4)a5=A.k("\ubc1c\uae09 \uc644\ub8cc. C-Card \uc9c0\uac11\uc5d0\uc11c \uc790\uaca9\uc99d\uc744 \ud655\uc778\ud558\uc138\uc694.","Issued. Check C-Card wallet.")
-else a5=b0?A.k("\ubcf8\ubd80 \ucd5c\uc885 \uacb0\uc7ac \ub300\uae30 \uc911\uc785\ub2c8\ub2e4.","Awaiting HQ approval."):A.k("\ubcf8\ubd80 \uc2b9\uc778 \ud6c4 \uc9c0\uac11\uc5d0 \ud45c\uc2dc\ub429\ub2c8\ub2e4.","Shows in wallet after HQ OK.")
+else a5=b0?A.k("\ud611\ud68c\ubcf8\ubd80 \ucd5c\uc885 \uacb0\uc7ac \ub300\uae30 \uc911\uc785\ub2c8\ub2e4.","Awaiting HQ approval."):A.k("\ud611\ud68c\ubcf8\ubd80 \uc2b9\uc778 \ud6c4 \uc9c0\uac11\uc5d0 \ud45c\uc2dc\ub429\ub2c8\ub2e4.","Shows in wallet after HQ OK.")
 a6=A.a([new A.lj(b3,q,r,!r),new A.lj(p,n,o,m),new A.lj(l,k,i,h),new A.lj(g,f,b1,e),new A.lj(d,c,b2,b),new A.lj(a,a0,b7,b6),new A.lj(a1,a2,s,a3),new A.lj(a4,a5,b4,b0)],t.Cv)
 b0=A.N(14)
 a5=A.aZ(A.a1(89,B.j.p()>>>16&255,B.j.p()>>>8&255,B.j.p()&255),1)
@@ -82637,7 +82640,7 @@ else r=a1
 if(a1.length===0)a1="Member"
 c=A.k(r+"\ub2d8",a1)
 q.a.toString
-b=A.k("\uc9c0\uc2dd \ud3c9\uac00 \uc218\ub8cc \ud6c4 \uc790\uaca9\uc99d \ubc1c\uae09 \uc758\ub8b0\uc640 \ubcf8\ubd80 \uc2b9\uc778\uc774 \ub05d\ub098\uba74\n\ub514\uc9c0\ud138 C-Card\uac00 \uc774\uacf3\uc5d0 \uc2e4\uc2dc\uac04 \ud45c\uc2dc\ub429\ub2c8\ub2e4.","After knowledge review, request & HQ approval,\nyour digital C-Card shows here.")
+b=A.k("\uc9c0\uc2dd \ud3c9\uac00 \uc218\ub8cc \ud6c4 \uc790\uaca9\uc99d \ubc1c\uae09 \uc758\ub8b0\uc640 \ud611\ud68c\ubcf8\ubd80 \uc2b9\uc778\uc774 \ub05d\ub098\uba74\n\ub514\uc9c0\ud138 C-Card\uac00 \uc774\uacf3\uc5d0 \uc2e4\uc2dc\uac04 \ud45c\uc2dc\ub429\ub2c8\ub2e4.","After knowledge review, request & HQ approval,\nyour digital C-Card shows here.")
 return A.d_(A.Y(A.a([B.Xu,B.a9,A.c(A.k(c+"\uc758 \ubc1c\uae09 \uc644\ub8cc\ub41c C-Card\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.","No issued C-Cards for "+c+"."),a,a,a,a,B.bt,a,a,a),B.A,A.c(b,a,a,a,a,B.cl,B.aB,a,a)],t.p),B.n,B.eQ,B.h),a,a)},
 $S:19}
 A.b4k.prototype={
@@ -85328,7 +85331,7 @@ n=A.k("\ub2f4\ub2f9 \uac15\uc0ac\uac00 \uc2b9\uc778\ud558\uba74 \ud544\uc218 \ua
 m=A.k("4. \ud559\uc2b5 \xb7 \uc9c0\uc2dd \ud3c9\uac00","4. Study \xb7 knowledge review")
 l=A.k("\ub0b4\uc11c\uc7ac\uc5d0\uc11c \uc9c4\ub3c4\ub97c \ucc44\uc6b0\uace0 \uc9c0\uc2dd \ud3c9\uac00\ub97c \uce58\ub985\ub2c8\ub2e4.","Complete progress in Library, then take the quiz.")
 k=A.k("5. \ubc1c\uae09 \uc758\ub8b0","5. Request certification")
-j=A.k("\uad50\uc721\uc0dd \u2192 \uac15\uc0ac \u2192 \uc9c0\uc5ed\ubcf8\ubd80 \uc21c\uc73c\ub85c \ubc1c\uae09\uc774 \uc9c4\ud589\ub429\ub2c8\ub2e4.","Student \u2192 instructor \u2192 regional HQ issues the card.")
+j=A.k("\uad50\uc721\uc0dd \u2192 \uac15\uc0ac \u2192 \ud611\ud68c\ubcf8\ubd80 \uc21c\uc73c\ub85c \ubc1c\uae09\uc774 \uc9c4\ud589\ub429\ub2c8\ub2e4.","Student \u2192 instructor \u2192 regional HQ issues the card.")
 i=A.k("6. C-Card \xb7 \ub85c\uadf8\ubd81","6. C-Card \xb7 logbook")
 return A.a([new A.iZ(r,s),new A.iZ(p,q),new A.iZ(n,o),new A.iZ(l,m),new A.iZ(j,k),new A.iZ(A.k("\ubc1c\uae09 \ud6c4 C-Card\uc5d0\uc11c \ud655\uc778\ud558\uace0, \ub85c\uadf8\ubd81\xb7\uad50\uc721 \uc11c\ub958\ub3c4 \uc774\uc6a9\ud569\ub2c8\ub2e4.","View cards in C-Card; use Logbook and training forms too."),i)],t.pT)
 case 1:s=A.k("1. \uac15\uc0ac \ub85c\uadf8\uc778","1. Instructor login")
