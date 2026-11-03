@@ -15755,28 +15755,30 @@ if(s==="\uae30\ub150\ud488")return"\uae30\ub150\ud488"
 if(s==="\uc2e4\ubb3c\uad50\uc790\uc7ac"||s==="\uc2e4\ubb3c\uad50\uc7ac")return"\uc2e4\ubb3c\uad50\uc7ac"
 if(B.b.m(s,"\uad50\uc7ac")||B.b.m(s,"\ubbf8\ub514\uc5b4"))return"\uad50\uc7ac"
 return null},
-c_r(a2,a3){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c=A.bL0(a2,null),b=Date.now(),a=new A.b6(b,0,!1).Yv().ig(324e8),a0=A.bu(A.aJ(a),A.aY(a),A.bw(a),0,0,0).ig(864e8),a1=A.Lw(A.aJ(a0),A.aY(a0),A.bw(a0),0,0,0).ig(-324e8)
-for(b=J.bA(a3),s=c.a,r=c.b,q=a1.a,p=a1.b,o=B.mx,n=B.mx,m=B.mx,l=B.mx;b.A();){k=b.gU(b)
-j=A.c_t(k)
-i=!0
-if(j!=null){h=j.a
-if(h>=s)g=h===s&&j.b<r
-else g=!0
-if(!g){if(h>=q)i=h===q&&j.b<p
-else i=!0
-i=!i}}if(i)continue
-f=A.c_s(k)
-if(f==null)continue
-e=A.c_q(k)
-if(e<=0)continue
-k=J.v(k,"orgId")
-d=A.cM(k==null?null:J.e(k))==="hq"
-o=o.J6(0,e,d)
-switch(f){case"\uad50\uc7ac":n=n.J6(0,e,d)
+c_r(a3,a4){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b=A.bL0(a3,null),a=Date.now(),a0=new A.b6(a,0,!1).Yv().ig(324e8),a1=A.bu(A.aJ(a0),A.aY(a0),A.bw(a0),0,0,0).ig(864e8),a2=A.Lw(A.aJ(a1),A.aY(a1),A.bw(a1),0,0,0).ig(-324e8)
+for(a=J.bA(a4),s=b.a,r=b.b,q=a2.a,p=a2.b,o=B.mx,n=B.mx,m=B.mx,l=B.mx;a.A();){k=a.gU(a)
+j=J.I(k)
+if(J.h(j.h(k,"voided"),!0))continue
+i=A.c_t(k)
+h=!0
+if(i!=null){g=i.a
+if(g>=s)f=g===s&&i.b<r
+else f=!0
+if(!f){if(g>=q)h=g===q&&i.b<p
+else h=!0
+h=!h}}if(h)continue
+e=A.c_s(k)
+if(e==null)continue
+d=A.c_q(k)
+if(d<=0)continue
+k=j.h(k,"orgId")
+c=A.cM(k==null?null:J.e(k))==="hq"
+o=o.J6(0,d,c)
+switch(e){case"\uad50\uc7ac":n=n.J6(0,d,c)
 break
-case"\uae30\ub150\ud488":m=m.J6(0,e,d)
+case"\uae30\ub150\ud488":m=m.J6(0,d,c)
 break
-case"\uc2e4\ubb3c\uad50\uc7ac":l=l.J6(0,e,d)
+case"\uc2e4\ubb3c\uad50\uc7ac":l=l.J6(0,d,c)
 break}}return new A.aBG(o,n,m,l)},
 bKZ(a,b){var s=J.I(a),r=s.h(a,"orgId"),q=r==null?null:J.e(r)
 if(q!=null&&q.length!==0)return A.cM(q)
@@ -19103,11 +19105,12 @@ if(h.aM(0,a8))continue
 j=j.h(a5,b6)
 h.l(0,a8,a2.ye(c,"textbook",a8,d,f,a6,e,J.e(j==null?"\ud544\uc218\uad50\uc7ac":j)))}}for(s=c1.length,n=0;n<c1.length;c1.length===s||(0,A.C)(c1),++n){m=c1[n]
 l=o.a(m.L(0))
+p=J.I(l)
+if(J.h(p.h(l,"voided"),!0))continue
 a9=A.bN6(l)
 if(a9==null)continue
 b0="sale_"+m.ga0(m)
 if(h.aM(0,b0))continue
-p=J.I(l)
 k=A.dq(p.h(l,"amount"))
 b1=k==null?b2:B.f.bj(k)
 if(b1==null)b1=0
