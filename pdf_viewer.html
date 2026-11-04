@@ -60,7 +60,6 @@
     #hitRight { right: 0; }
     #hitLeft.disabled, #hitRight.disabled { pointer-events: none; }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
   <div id="chrome">
@@ -86,9 +85,42 @@
     <div id="pan"><div id="sheet"><canvas id="pdfCanvas"></canvas></div></div>
     <div id="hitRight"></div>
   </div>
-  <script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc =
-      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  <script type="module">
+    const PDFJS_PRIMARY = '6.2.108';
+    const PDFJS_FALLBACK = '3.11.174';
+
+    function loadClassicScript(src) {
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = () => resolve();
+        s.onerror = () => reject(new Error('script load failed: ' + src));
+        document.head.appendChild(s);
+      });
+    }
+
+    async function loadPdfJs() {
+      try {
+        const mod = await import(
+          'https://cdn.jsdelivr.net/npm/pdfjs-dist@' + PDFJS_PRIMARY + '/build/pdf.min.mjs'
+        );
+        mod.GlobalWorkerOptions.workerSrc =
+          'https://cdn.jsdelivr.net/npm/pdfjs-dist@' + PDFJS_PRIMARY + '/build/pdf.worker.min.mjs';
+        window.pdfjsLib = mod;
+        return mod;
+      } catch (_) {
+        await loadClassicScript(
+          'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/' + PDFJS_FALLBACK + '/pdf.min.js'
+        );
+        const lib = window.pdfjsLib;
+        if (!lib) throw new Error('pdf.js fallback missing');
+        lib.GlobalWorkerOptions.workerSrc =
+          'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/' + PDFJS_FALLBACK + '/pdf.worker.min.js';
+        return lib;
+      }
+    }
+
+    const pdfjsLib = await loadPdfJs();
     const params = new URLSearchParams(location.search);
     const file = params.get('file') || '';
     const bookTitle = params.get('title') || 'APDI 교재';
@@ -334,7 +366,14 @@
         const ctx = canvas.getContext('2d', { alpha: false });
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.imageSmoothingEnabled = false;
-        renderTask = page.render({ canvasContext: ctx, viewport: viewport });
+        // pdf.js 5+/6: prefer `canvas`; keep canvasContext for 3.x fallback.
+        const renderParams = { viewport: viewport };
+        if (typeof pdfjsLib.version === 'string' && pdfjsLib.version.charAt(0) >= '5') {
+          renderParams.canvas = canvas;
+        } else {
+          renderParams.canvasContext = ctx;
+        }
+        renderTask = page.render(renderParams);
         await renderTask.promise;
         renderTask = null;
         lastFitKey = fitKey();
