@@ -576,6 +576,8 @@
           disableRange: true,
           disableStream: true,
           disableAutoFetch: true,
+          // Pretendard 등 임베드 글꼴의 FontFace 로딩 오류로 괄호·인접 글자가 원형으로 뭉개지는 것 방지.
+          disableFontFace: true,
         }).promise;
         pageNum = Math.min(pdf.numPages, Math.max(1, initialPageParam));
         if (pageJumpInput) pageJumpInput.value = String(pageNum);

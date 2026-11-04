@@ -83910,7 +83910,7 @@ n.d=r
 q=A.kb("pdf_viewer.html")
 p=n.a.c
 o=J.h($.eR().a,"en")?"en":"ko"
-o=q.NK(0,A.a7(["file",p,"page",""+s,"lang",o,"v","20261031e"],t.N,t.z)).gp0()
+o=q.NK(0,A.a7(["file",p,"page",""+s,"lang",o,"v","20261104q"],t.N,t.z)).gp0()
 n.e!==$&&A.bn()
 n.e=o
 $.bKq()
