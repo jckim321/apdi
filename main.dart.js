@@ -22703,8 +22703,6 @@ if(q==="merch"||q==="\uae30\ub150\ud488")return"\uae30\ub150\ud488"
 if(q==="physical"||q==="\uc2e4\ubb3c\uad50\uc7ac")return"\uc2e4\ubb3c\uad50\uc7ac"
 if(q==="cert")return"\uae30\ud0c0\uc571"
 return"\uae30\ud0c0\uc571"}if(r==="membership")return o
-s=n.h(a,"role")
-if(J.d(s==null?"":s)==="required")return o
 s=n.h(a,"salesGroup")
 p=B.b.j(J.d(s==null?"":s))
 if(p.length===0)p=A.bXW(a)
@@ -23208,12 +23206,10 @@ if(o==="manual_income"||s==="\uc9c1\uc811 \uc218\uc785")return null
 if(o==="membership"||s==="\uba64\ubc84\uc2ed")return"membership"
 if(o==="hq_direct")return"cert"
 if(o==="manual_card"){if(r==="cert"||r==="\uc790\uaca9\uc99d"||s==="\uc790\uaca9\uc99d"||s==="cert")return"cert"
-return"other"}if(s!=="\uc2e4\ubb3c\uad50\uc790\uc7ac"){p=q.h(a,"category")
-p=A.cY(J.d(p==null?"":p),null)==="\uc2e4\ubb3c\uad50\uc790\uc7ac"}else p=!0
-if(p)return"physical"
+return"other"}if(s!=="\uc2e4\ubb3c\uad50\uc790\uc7ac"){q=q.h(a,"category")
+q=A.cY(J.d(q==null?"":q),null)==="\uc2e4\ubb3c\uad50\uc790\uc7ac"}else q=!0
+if(q)return"physical"
 if(o==="merch"||A.lb(a))return"merch"
-q=q.h(a,"role")
-if(J.d(q==null?"":q)==="required")return null
 return"textbook"},
 H0(a){var s=0,r=A.r(t.H),q,p,o
 var $async$H0=A.n(function(b,c){if(b===1)return A.o(c,r)
